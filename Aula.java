@@ -3,11 +3,15 @@ public class Aula extends World
 {
     private Alumno alumno = new Alumno(2,100,5);
     private Contador contador = new Contador();
+    private int posicion = 0;
     public void nivel1(){
         addObject(alumno, 300, 300);
-        String[] dialogos = {"¡Hola estudiante!","Bienvenido al segundo año de la carrera de ingenieria en sistemas",};
-        Profesor profe=new Profesor("Hola estudiante");
-        addObject(profe, 300, 100);
+        String[] dialogos = { //corresponde al dialogo del nivel 1, por eso queda aca
+            "¡Hola estudiante!",
+            "Bienvenido al segundo año de \nla carrera de ingenieria en sistemas.",
+        };
+        Profesor mario = new Profesor(dialogos);
+        addObject(mario, 300, 100);
     }
     public void nivel2(){
         addObject(alumno, 300, 300);
