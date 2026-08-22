@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Dialogo
+comment1.params=dialogo
+comment1.target=Dialogo(java.lang.String)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ iniciarTexto()
+comment4.params=
+comment4.target=void\ removerTexto()
+comment5.params=
+comment5.target=void\ eliminarse()
+comment6.params=ancho\ alto
+comment6.target=void\ cambiarTamano(int,\ int)
+numComments=7

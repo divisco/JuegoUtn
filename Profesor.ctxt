@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Profesor
+comment1.params=contenido
+comment1.target=Profesor(java.lang.String)
+comment2.params=
+comment2.target=void\ hablar()
+comment3.params=
+comment3.target=void\ act()
+numComments=4
