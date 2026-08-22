@@ -5,6 +5,7 @@ public class Aula extends World
     private Contador contador = new Contador();
     public void nivel1(){
         addObject(alumno, 300, 300);
+        String[] dialogos = {"¡Hola estudiante!","Bienvenido al segundo año de la carrera de ingenieria en sistemas",};
         Profesor profe=new Profesor("Hola estudiante");
         addObject(profe, 300, 100);
     }
