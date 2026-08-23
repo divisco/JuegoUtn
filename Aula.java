@@ -1,7 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Aula extends World
 {
-    private Alumno alumno = new Alumno(2,100,5);
+    private Vida vida = new Vida();
+    private Alumno alumno = new Alumno(2,100,5, vida);
     private Contador contador = new Contador();
     private int posicion = 0;
     public void nivel1(){
@@ -9,6 +10,11 @@ public class Aula extends World
         String[] dialogos = { //corresponde al dialogo del nivel 1, por eso queda aca
             "¡Hola estudiante!",
             "Bienvenido al segundo año de \nla carrera de ingenieria en sistemas.",
+            "Tendras que aprobar las 8 \nmaterias de este año",
+            "La clave es que consigas horas \nde estudio atacando a las materias",
+            "Sole y yo te ayudaremos, unicamente \nsi estudias lo suficiente",
+            "Recuerda, estamos de tu lado \npero tambien necesitamos de tu voluntad",
+            "Up to you!"
         };
         Profesor mario = new Profesor(dialogos);
         addObject(mario, 300, 100);
@@ -37,7 +43,8 @@ public class Aula extends World
     public Aula()
     {    
         super(600, 400, 1);
-        addObject(contador, 50, 20);
+        addObject(contador, 530, 20);
+        addObject(vida, 60, 20);
         nivel1();
     }
 }

@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Vida
+comment1.params=
+comment1.target=Vida()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ rescalar()
+comment4.params=numSprite
+comment4.target=void\ cambiarImagen(int)
+numComments=5

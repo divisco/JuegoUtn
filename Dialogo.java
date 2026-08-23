@@ -6,6 +6,7 @@ public class Dialogo extends Actor
     private Texto texto;
     private GreenfootImage imagenBase;
     private int indice = 0;
+    private boolean teclaFpresionada = false;
     public Dialogo(String[] dialogo){
         this.dialogo=dialogo;
     }
@@ -33,13 +34,17 @@ public class Dialogo extends Actor
     }
     
     public void cambiarDialogo() {
-        if (Greenfoot.isKeyDown("f")) {
+        if (Greenfoot.isKeyDown("f") && teclaFpresionada==false) {
             if (indice < dialogo.length-1){
                 indice = indice + 1;
-            removerTexto();
-            iniciarTexto();
+                removerTexto();
+                iniciarTexto();
+                Greenfoot.playSound("click.mp3");
+                teclaFpresionada = true;
             }
-            
+        }
+        if (!Greenfoot.isKeyDown("f")) {
+            teclaFpresionada = false;
         }
     }
 }

@@ -1,11 +1,13 @@
 #BlueJ class context
 comment0.target=Alumno
-comment1.params=velocidad\ vida\ fuerza
-comment1.target=Alumno(int,\ int,\ int)
+comment1.params=velocidad\ vida\ fuerza\ barraVida
+comment1.target=Alumno(int,\ int,\ int,\ Vida)
 comment2.params=
 comment2.target=void\ cambiarArma()
 comment3.params=
 comment3.target=void\ movimiento()
 comment4.params=
 comment4.target=void\ act()
-numComments=5
+comment5.params=decremento
+comment5.target=void\ recibirDano(int)
+numComments=6
