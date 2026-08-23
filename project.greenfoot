@@ -22,11 +22,19 @@ dependency5.type=UsesDependency
 dependency6.from=Dialogo
 dependency6.to=Texto
 dependency6.type=UsesDependency
+<<<<<<< HEAD
 editor.fx.0.height=0
 editor.fx.0.width=0
 editor.fx.0.x=0
 editor.fx.0.y=0
 height=584
+=======
+editor.fx.0.height=1039
+editor.fx.0.width=974
+editor.fx.0.x=953
+editor.fx.0.y=0
+height=1039
+>>>>>>> 09782c3bf34730eb1dba407ce1678523b7b3e09b
 package.numDependencies=6
 package.numTargets=9
 project.charset=UTF-8
@@ -57,22 +65,25 @@ target2.type=ClassTarget
 target2.width=120
 target2.x=0
 target2.y=0
-target3.height=70
-target3.name=Aula
-target3.showInterface=false
-target3.type=ClassTarget
+target3.height=82
+target3.name=JuegoUtn
+target3.type=PackageTarget
 target3.width=120
 target3.x=0
 target3.y=0
 target4.height=70
-target4.name=Alumno
+target4.name=Aula
 target4.showInterface=false
 target4.type=ClassTarget
 target4.width=120
 target4.x=0
 target4.y=0
 target5.height=70
+<<<<<<< HEAD
 target5.name=Vida
+=======
+target5.name=Alumno
+>>>>>>> 09782c3bf34730eb1dba407ce1678523b7b3e09b
 target5.showInterface=false
 target5.type=ClassTarget
 target5.width=120
@@ -107,7 +118,8 @@ target9.width=120
 target9.x=0
 target9.y=0
 version=3.1.0
-width=824
+width=974
 world.lastInstantiated=Aula
-xPosition=268
-yPosition=84
+xPosition=0
+yPosition=0
+

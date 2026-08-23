@@ -2,10 +2,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Profesor extends Actor
 {
-    private String contenido = "";
+    private String[] contenido;
     private Dialogo dialogo;
 
-    public Profesor(String contenido){
+    public Profesor(String[] contenido){
         this.contenido = contenido;
     }
 
