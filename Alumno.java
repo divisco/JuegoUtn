@@ -5,6 +5,9 @@ public class Alumno extends Actor
     private int vida;
     private Vida barraVida;
     private int fuerza;
+    private int tamanoScala = 100;
+    private int margenContacto = 10;
+    
     public Alumno(int velocidad, int vida, int fuerza, Vida barraVida){
         this.velocidad = velocidad;
         this.vida=vida;
@@ -16,23 +19,86 @@ public class Alumno extends Actor
             
         }
     }
-    public void movimiento(){
-        if(Greenfoot.isKeyDown("w")){
-            setLocation(getX(), getY()-velocidad);
-        }
+   
+    public void movimientoRight(){
         if(Greenfoot.isKeyDown("d")){
-            setLocation(getX()+velocidad, getY());
+            intentarMover(getX() + velocidad, getY());
+            setImage("alumnoLadoDer.png");
+            tamanoAlumno();
         }
+    }
+    public void movimientoLeft(){
         if(Greenfoot.isKeyDown("a")){
-            setLocation(getX()-velocidad, getY());
+            intentarMover(getX() - velocidad, getY());
+            setImage("alumnoLadoIzq.png");
+            tamanoAlumno();
         }
+    }
+    public void movimientoUp(){
+        if(Greenfoot.isKeyDown("w")){
+            intentarMover(getX(), getY() - velocidad);
+            setImage("alumnoEspalda.png");
+            tamanoAlumno();
+        }
+    }
+    public void movimientoDown(){
         if(Greenfoot.isKeyDown("s")){
-            setLocation(getX(), getY()+velocidad);
+            intentarMover(getX(), getY() + velocidad);
+            setImage("alumnoFrente.png");
+            tamanoAlumno();
+        }
+    }
+    
+    public void tamanoAlumno(){
+        GreenfootImage imagen = getImage();
+        imagen.scale(tamanoScala,tamanoScala);
+        setImage(imagen);
+    }
+    
+    private boolean debeChocarProfesor() {
+        Profesor prof = (Profesor) getOneIntersectingObject(Profesor.class);
+        if (prof != null) {
+            int distX = Math.abs(getX() - prof.getX());
+            int distY = Math.abs(getY() - prof.getY());
+            
+            int limiteX = (getImage().getWidth() / 2) + (prof.getImage().getWidth() / 2) - margenContacto - 30;
+            int limiteY = (getImage().getHeight() / 2) + (prof.getImage().getHeight() / 2) - margenContacto;
+
+            if (distX < limiteX && distY < limiteY) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private void intentarMover(int nuevaX, int nuevaY) {
+        int oldX = getX();
+        int oldY = getY();
+
+        int radioX = getImage().getWidth() / 2;
+        int radioY = getImage().getHeight() / 2;
+
+        int minX = radioX;
+        int maxX = getWorld().getWidth() - radioX;
+        int minY = radioY;
+        int maxY = getWorld().getHeight() - radioY;
+
+        if (nuevaX < minX) nuevaX = minX;
+        if (nuevaX > maxX) nuevaX = maxX;
+        if (nuevaY < minY) nuevaY = minY;
+        if (nuevaY > maxY) nuevaY = maxY;
+
+        setLocation(nuevaX, nuevaY);
+
+        if (debeChocarProfesor()) {
+            setLocation(oldX, oldY);
         }
     }
     public void act()
     {
-        movimiento();
+        movimientoRight();
+        movimientoLeft();
+        movimientoUp();
+        movimientoDown();
     }
     public void recibirDano(int decremento){
         vida = vida-decremento;

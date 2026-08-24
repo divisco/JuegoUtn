@@ -4,6 +4,7 @@ public class Profesor extends Actor
 {
     private String[] contenido;
     private Dialogo dialogo;
+    private int tamanoScala = 100;
 
     public Profesor(String[] contenido){
         this.contenido = contenido;
@@ -25,9 +26,17 @@ public class Profesor extends Actor
             }
         }
     }
-
+    
+    public void tamanoProfesor(){
+        GreenfootImage imagen = getImage();
+        imagen.scale(tamanoScala,tamanoScala);
+        setImage(imagen);
+    }
+    
     public void act()
     {
         hablar();
+        setImage("marioSkin.png");
+        tamanoProfesor();
     }
 }

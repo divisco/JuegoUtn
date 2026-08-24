@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Aula extends World
 {
     private Vida vida = new Vida();
-    private Alumno alumno = new Alumno(2,100,5, vida);
+    private Alumno alumno = new Alumno(5,100,5, vida);
     private Contador contador = new Contador();
     private int posicion = 0;
     public void nivel1(){
