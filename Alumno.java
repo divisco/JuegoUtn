@@ -7,7 +7,15 @@ public class Alumno extends Actor
     private int fuerza;
     private int tamanoScala = 100;
     private int margenContacto = 10;
+    private boolean tieneArmas = false;
     
+     
+    public Alumno() {
+        this.velocidad = 5;
+        this.vida = 100;
+        this.fuerza = 10;
+        setImage("alumnoFrente.png");
+    }
     public Alumno(int velocidad, int vida, int fuerza, Vida barraVida){
         this.velocidad = velocidad;
         this.vida=vida;
@@ -103,6 +111,7 @@ public class Alumno extends Actor
     public void recibirDano(int decremento){
         vida = vida-decremento;
         Greenfoot.playSound("desaprobado.mp3");
+        if (barraVida !=null){
         if(vida<100){
             barraVida.cambiarImagen(2);
         }
@@ -118,5 +127,12 @@ public class Alumno extends Actor
         if(vida<=0){
             barraVida.cambiarImagen(6);
         }
+ 
+       }
+    }
+    
+    public void recibirArmas() {
+        this.tieneArmas = true; // O la lógica para habilitar el lápiz y la goma
     }
 }
+

@@ -7,26 +7,36 @@ public class Dialogo extends Actor
     private GreenfootImage imagenBase;
     private int indice = 0;
     private boolean teclaFpresionada = false;
+
     public Dialogo(String[] dialogo){
-        this.dialogo=dialogo;
+        this.dialogo = dialogo;
     }
+
     public void act(){
         cambiarDialogo();
     }
+
     public void iniciarTexto(){
         texto = new Texto(dialogo[indice]);
-        getWorld().addObject(texto, getX(),getY());    
+        getWorld().addObject(texto, getX(), getY());    
     }
+
     public void removerTexto(){
-        getWorld().removeObject(texto);
+        if (texto != null && texto.getWorld() != null) {
+            getWorld().removeObject(texto);
+        }
     }
+
     public void eliminarse()
     {
-        removerTexto();
-        getWorld().removeObject(this);
+    removerTexto();
+    World mundo = getWorld();
+    if (mundo != null) {
+        mundo.removeObject(this);
     }
-    public void cambiarTamano(int ancho, int alto)
-    {
+    }
+
+    public void cambiarTamano(int ancho, int alto){
         GreenfootImage imagen = getImage();
         imagen.scale(ancho, alto);
         setImage(imagen);
@@ -34,15 +44,29 @@ public class Dialogo extends Actor
     }
     
     public void cambiarDialogo() {
-        if (Greenfoot.isKeyDown("f") && teclaFpresionada==false) {
-            if (indice < dialogo.length-1){
-                indice = indice + 1;
+        if (Greenfoot.isKeyDown("f") && !teclaFpresionada) {
+            Greenfoot.playSound("click.mp3");
+            teclaFpresionada = true;
+
+            
+            if (indice < dialogo.length - 1){
+                indice++;
                 removerTexto();
                 iniciarTexto();
-                Greenfoot.playSound("click.mp3");
-                teclaFpresionada = true;
+            } 
+            
+            else {
+                // 1. Notifica al alumno para que reciba las armas
+                Alumno alumno = (Alumno) getWorld().getObjects(Alumno.class).get(0);
+                if (alumno != null) {
+                    alumno.recibirArmas();
+                }
+
+                // 2. Elimina el cuadro de dialogo y el texto de la pantalla
+                eliminarse();
             }
         }
+
         if (!Greenfoot.isKeyDown("f")) {
             teclaFpresionada = false;
         }

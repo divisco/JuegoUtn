@@ -1,7 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class Profesor extends Actor
-{
+public class Profesor extends Actor{
     private String[] contenido;
     private Dialogo dialogo;
     private int tamanoScala = 100;
@@ -12,16 +11,18 @@ public class Profesor extends Actor
 
     public void hablar() {
         if (isTouching(Alumno.class)) {
-            if (dialogo == null) {
+            if (dialogo == null || dialogo.getWorld() == null) {
                 dialogo = new Dialogo(this.contenido);
                 dialogo.cambiarTamano(200, 100);
-                getWorld().addObject(dialogo, getX()+125, getY()-50);
+                getWorld().addObject(dialogo, getX() + 125, getY() - 50);
                 dialogo.iniciarTexto();
             }
         } 
         else {
             if (dialogo != null) {
-                dialogo.eliminarse();
+                if (dialogo.getWorld() != null) {
+                    dialogo.eliminarse();
+                }
                 dialogo = null; 
             }
         }
@@ -29,7 +30,7 @@ public class Profesor extends Actor
     
     public void tamanoProfesor(){
         GreenfootImage imagen = getImage();
-        imagen.scale(tamanoScala,tamanoScala);
+        imagen.scale(tamanoScala, tamanoScala);
         setImage(imagen);
     }
     
