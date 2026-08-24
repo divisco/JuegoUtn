@@ -4,6 +4,7 @@ public class Aula extends World
     private Vida vida = new Vida();
     private Alumno alumno = new Alumno(5,100,5, vida);
     private Contador contador = new Contador();
+    private Inventario inventario = new Inventario();
     private int posicion = 0;
     public void nivel1(){
         addObject(alumno, 300, 300);
@@ -18,6 +19,8 @@ public class Aula extends World
         };
         Profesor mario = new Profesor(dialogos);
         addObject(mario, 300, 100);
+        
+        setPaintOrder(Inventario.class, Contador.class, Alumno.class, Profesor.class);
     }
     public void nivel2(){
         addObject(alumno, 300, 300);
@@ -45,6 +48,7 @@ public class Aula extends World
         super(600, 400, 1);
         addObject(contador, 530, 20);
         addObject(vida, 60, 20);
+        addObject(inventario, 175, 25);
         nivel1();
     }
 }

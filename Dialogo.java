@@ -46,16 +46,12 @@ public class Dialogo extends Actor
     public void cambiarDialogo() {
         if (Greenfoot.isKeyDown("f") && !teclaFpresionada) {
             Greenfoot.playSound("click.mp3");
-            teclaFpresionada = true;
-
-            
+            teclaFpresionada = true;            
             if (indice < dialogo.length - 1){
                 indice++;
                 removerTexto();
                 iniciarTexto();
-            } 
-            
-            else {
+            } else {
                 // 1. Notifica al alumno para que reciba las armas
                 Alumno alumno = (Alumno) getWorld().getObjects(Alumno.class).get(0);
                 if (alumno != null) {

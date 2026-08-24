@@ -8,7 +8,7 @@ public class Alumno extends Actor
     private int tamanoScala = 100;
     private int margenContacto = 10;
     private boolean tieneArmas = false;
-    
+    private Object[] inventario = (Object[]) new Object[3];
      
     public Alumno() {
         this.velocidad = 5;
@@ -133,6 +133,8 @@ public class Alumno extends Actor
     
     public void recibirArmas() {
         this.tieneArmas = true; // O la lógica para habilitar el lápiz y la goma
+        
+        
     }
 }
 
