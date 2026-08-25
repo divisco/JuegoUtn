@@ -33,6 +33,7 @@ public class Alumno extends Actor
             intentarMover(getX() + velocidad, getY());
             setImage("alumnoLadoDer.png");
             tamanoAlumno();
+            
         }
     }
     public void movimientoLeft(){
@@ -110,23 +111,23 @@ public class Alumno extends Actor
     }
     public void recibirDano(int decremento){
         vida = vida-decremento;
-        Greenfoot.playSound("desaprobado.mp3");
         if (barraVida !=null){
-        if(vida<100){
-            barraVida.cambiarImagen(2);
-        }
-        if(vida<80){
-            barraVida.cambiarImagen(3);
-        }
-        if(vida<60){
-            barraVida.cambiarImagen(4);
-        }
-        if(vida<40){
-            barraVida.cambiarImagen(5);
-        }
-        if(vida<=0){
-            barraVida.cambiarImagen(6);
-        }
+            Greenfoot.playSound("desaprobado.mp3");
+            if(vida<100){
+                barraVida.cambiarImagen(2);
+            }
+            if(vida<80){
+                barraVida.cambiarImagen(3);
+            }
+            if(vida<60){
+                barraVida.cambiarImagen(4);
+            }
+            if(vida<40){
+                barraVida.cambiarImagen(5);
+            }
+            if(vida<=0){
+                barraVida.cambiarImagen(6);
+            }
  
        }
     }
