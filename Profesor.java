@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Profesor extends Actor{
     private String[] contenido;
     private Dialogo dialogo;
-    private int tamanoScala = 100;
+    private int tamanoScala = 75;
 
     public Profesor(String[] contenido){
         this.contenido = contenido;
@@ -28,7 +28,7 @@ public class Profesor extends Actor{
         }
     }
     
-    public void tamanoProfesor(){
+    public void resize(){
         GreenfootImage imagen = getImage();
         imagen.scale(tamanoScala, tamanoScala);
         setImage(imagen);
@@ -37,7 +37,6 @@ public class Profesor extends Actor{
     public void act()
     {
         hablar();
-        setImage("marioSkin.png");
-        tamanoProfesor();
+        resize();
     }
 }

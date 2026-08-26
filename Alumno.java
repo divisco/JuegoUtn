@@ -5,7 +5,7 @@ public class Alumno extends Actor
     private int vida;
     private Vida barraVida;
     private int fuerza;
-    private int tamanoScala = 100;
+    private int tamanoScala = 75;
     private int margenContacto = 10;
     private boolean tieneArmas = false;
     private Object[] inventario = (Object[]) new Object[3];
@@ -32,7 +32,7 @@ public class Alumno extends Actor
         if(Greenfoot.isKeyDown("d")){
             intentarMover(getX() + velocidad, getY());
             setImage("alumnoLadoDer.png");
-            tamanoAlumno();
+            resize();
             
         }
     }
@@ -40,38 +40,50 @@ public class Alumno extends Actor
         if(Greenfoot.isKeyDown("a")){
             intentarMover(getX() - velocidad, getY());
             setImage("alumnoLadoIzq.png");
-            tamanoAlumno();
+            resize();
         }
     }
     public void movimientoUp(){
         if(Greenfoot.isKeyDown("w")){
             intentarMover(getX(), getY() - velocidad);
             setImage("alumnoEspalda.png");
-            tamanoAlumno();
+            resize();
         }
     }
     public void movimientoDown(){
         if(Greenfoot.isKeyDown("s")){
             intentarMover(getX(), getY() + velocidad);
             setImage("alumnoFrente.png");
-            tamanoAlumno();
+            resize();
         }
     }
     
-    public void tamanoAlumno(){
+    public void resize(){
         GreenfootImage imagen = getImage();
         imagen.scale(tamanoScala,tamanoScala);
         setImage(imagen);
     }
     
-    private boolean debeChocarProfesor() {
+    private boolean detectHitbox() {
         Profesor prof = (Profesor) getOneIntersectingObject(Profesor.class);
+        Banco banco = (Banco) getOneIntersectingObject(Banco.class);
         if (prof != null) {
             int distX = Math.abs(getX() - prof.getX());
             int distY = Math.abs(getY() - prof.getY());
             
             int limiteX = (getImage().getWidth() / 2) + (prof.getImage().getWidth() / 2) - margenContacto - 30;
             int limiteY = (getImage().getHeight() / 2) + (prof.getImage().getHeight() / 2) - margenContacto;
+
+            if (distX < limiteX && distY < limiteY) {
+                return true;
+            }
+        }
+        if (banco != null) {
+            int distX = Math.abs(getX() - banco.getX());
+            int distY = Math.abs(getY() - banco.getY());
+            
+            int limiteX = (getImage().getWidth() / 2) + (banco.getImage().getWidth() / 2) - margenContacto - 30;
+            int limiteY = (getImage().getHeight() / 2) + (banco.getImage().getHeight() / 2) - margenContacto - 20;
 
             if (distX < limiteX && distY < limiteY) {
                 return true;
@@ -97,8 +109,7 @@ public class Alumno extends Actor
         if (nuevaY > maxY) nuevaY = maxY;
 
         setLocation(nuevaX, nuevaY);
-
-        if (debeChocarProfesor()) {
+        if (detectHitbox()) {
             setLocation(oldX, oldY);
         }
     }
