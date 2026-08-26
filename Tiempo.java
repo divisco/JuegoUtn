@@ -8,12 +8,39 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Tiempo extends Actor
 {
-    /**
-     * Act - do whatever the Tiempo wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    private int reloj;
+    private int contador;
+    private int tiempoRestante;
+    private int ciclos;
+    
+    public Tiempo(int segundosIniciales){
+        this.tiempoRestante = segundosIniciales;
+        actualizarImagen();
+    }
+    
     public void act()
     {
-        // Add your action code here.
+        contarTiempo(tiempoRestante);
     }
+    
+    public void actualizarImagen(){
+        GreenfootImage img = new GreenfootImage(""+ tiempoRestante,40,Color.WHITE, new Color(0, 0, 0, 0));
+        setImage(img);
+    }
+    
+    public void contarTiempo(int segundosIniciales){
+        
+        //escala aprox: 60 ciclos = 1 segundo
+        tiempoRestante =+ segundosIniciales;
+        if (tiempoRestante > 0){
+            ciclos ++;
+            if (ciclos >= 60) {
+                tiempoRestante --;
+                ciclos = 0;
+                actualizarImagen();
+            }
+        }
+    }
+    
+    
 }
