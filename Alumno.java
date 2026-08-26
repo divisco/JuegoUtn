@@ -9,6 +9,8 @@ public class Alumno extends Actor
     private int margenContacto = 10;
     private boolean tieneArmas = false;
     private Object[] inventario = (Object[]) new Object[3];
+    private int tiempoDisparo = 20;
+    private int contadorDisparo = 0;
      
     public Alumno() {
         this.velocidad = 5;
@@ -24,16 +26,34 @@ public class Alumno extends Actor
     }
     public void cambiarArma(){
         if(Greenfoot.isKeyDown("e")){
-            
         }
     }
-   
+    public void disparar() {
+        if(contadorDisparo >= tiempoDisparo){
+            if (Greenfoot.isKeyDown("up")) {
+                Arma arma = new Arma("UP"); 
+                getWorld().addObject(arma, getX(), getY());
+            }
+            if (Greenfoot.isKeyDown("down")) {
+                Arma arma = new Arma("DOWN"); 
+                getWorld().addObject(arma, getX(), getY());
+            }
+            if (Greenfoot.isKeyDown("left")) {
+                Arma arma = new Arma("IZQUIERDO"); 
+                getWorld().addObject(arma, getX(), getY());
+            }
+            if (Greenfoot.isKeyDown("right")) {
+                Arma arma = new Arma("DERECHO"); 
+                getWorld().addObject(arma, getX(), getY());
+            }
+            contadorDisparo = 0;
+        }
+    }
     public void movimientoRight(){
         if(Greenfoot.isKeyDown("d")){
             intentarMover(getX() + velocidad, getY());
             setImage("alumnoLadoDer.png");
-            resize();
-            
+            resize();  
         }
     }
     public void movimientoLeft(){
@@ -119,6 +139,8 @@ public class Alumno extends Actor
         movimientoLeft();
         movimientoUp();
         movimientoDown();
+        disparar();
+        contadorDisparo++;
     }
     public void recibirDano(int decremento){
         vida = vida-decremento;
