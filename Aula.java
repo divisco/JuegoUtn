@@ -9,7 +9,8 @@ public class Aula extends World
     private int posicion = 0;
     private int segundosIniciales = 30;
     private Tiempo tiempo = new Tiempo(0);
-    private String[] dialogoNivel1 = { //corresponde al dialogo del nivel 1, por eso queda aca
+    private int currentEscenario = 0;
+    private String[] dialogoNivel1 = { //corresponde al dialogo del nivel 1, por eso queda aca, esto lo dice mario
             "¡Hola estudiante!",
             "Bienvenido al segundo año de \nla carrera de ingenieria en sistemas.",
             "Tendras que aprobar las 8 \nmaterias de este año",
@@ -43,40 +44,50 @@ public class Aula extends World
         addObject(banco2, 400, 200);
         addObject(banco3, 200, 300);
         addObject(banco4, 400, 300);
-        //Permite poner que objeto se visualiza por encima de otro
-        setPaintOrder(Inventario.class, Contador.class,Banco.class,Vida.class,Texto.class, Dialogo.class, Alumno.class, Profesor.class);
     }
     public void nivel1(){
-        addObject(alumno, 300, 300);
+        limpiarEscenario();
         tiempo.contarTiempo(segundosIniciales);
     }
     public void nivel2(){
-        addObject(alumno, 300, 300);
+        limpiarEscenario();
         tiempo.contarTiempo(segundosIniciales * 2);
     }
     public void nivel3(){
-        addObject(alumno, 300, 300);
+        limpiarEscenario();
         tiempo.contarTiempo(segundosIniciales * 3);
     }
     public void nivel4(){
-        addObject(alumno, 300, 300);
+        limpiarEscenario();
         tiempo.contarTiempo(segundosIniciales * 4);
     }
     public void nivel5(){
-        addObject(alumno, 300, 300);
+        limpiarEscenario();
         tiempo.contarTiempo(segundosIniciales * 5);
     }
     public void nivel6(){
-        addObject(alumno, 300, 300);
+        limpiarEscenario();
         tiempo.contarTiempo(segundosIniciales * 6);
     }
     public void nivel7(){
-        addObject(alumno, 300, 300);
+        limpiarEscenario();
         tiempo.contarTiempo(segundosIniciales * 7);
     }
     public void nivel8(){
-        addObject(alumno, 300, 300);
+        limpiarEscenario();
         tiempo.contarTiempo(segundosIniciales * 8);
+    }
+    public void siguienteNivel(){
+        currentEscenario+=1;
+        if(currentEscenario==1){
+            showText("Bienvenido al siguiente nivel...", 300, 100);
+            nivel1();
+            Greenfoot.delay(100);
+            showText("", 300, 100);
+        }
+    }
+    public void setCapas(){
+        setPaintOrder(Texto.class,Dialogo.class, Inventario.class,Tiempo.class, Contador.class,Banco.class,Vida.class, Alumno.class, Profesor.class);
     }
     public Aula()
     {    
@@ -85,6 +96,7 @@ public class Aula extends World
         addObject(vida, 60, 20);
         addObject(inventario, 175, 25);
         addObject(tiempo, 350, 20);
+        setCapas();
         nivel0();
     }
 }

@@ -7,7 +7,7 @@ public class Dialogo extends Actor
     private GreenfootImage imagenBase;
     private int indice = 0;
     private boolean teclaFpresionada = false;
-
+    Aula escenario;
     public Dialogo(String[] dialogo){
         this.dialogo = dialogo;
     }
@@ -59,6 +59,7 @@ public class Dialogo extends Actor
                 }
 
                 // 2. Elimina el cuadro de dialogo y el texto de la pantalla
+                ((Aula) getWorld()).siguienteNivel();
                 eliminarse();
             }
         }
