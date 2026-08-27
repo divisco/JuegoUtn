@@ -15,7 +15,6 @@ public class Materia extends Actor
     private int vida;
     private int velocidad;
     
-    
     //constructor
     public Materia(String nombre, int danio, int vida, int velocidad){
         this.nombre = nombre;

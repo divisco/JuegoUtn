@@ -14,7 +14,7 @@ public class Lapiz extends Arma
      */
     public void act()
     {
-        
+        setImage("Lapiz.pgn");
     }
     public Lapiz(String direccionBorde) {
         super(direccionBorde); // Llama al constructor de Arma

@@ -15,6 +15,7 @@ public class Goma extends Arma
     public void act()
     {
         // Add your action code here.
+        setImage("Goma.png");
     }
     
     public Goma(String direccionBorde) {

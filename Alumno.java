@@ -8,9 +8,9 @@ public class Alumno extends Actor
     private int tamanoScala = 75;
     private int margenContacto = 10;
     private boolean tieneArmas = false;
-    private Object[] inventario = (Object[]) new Object[3];
-    private int tiempoDisparo = 20;
+    private int tiempoDisparo = 30;
     private int contadorDisparo = 0;
+    private int seleccionador = 0;
      
     public Alumno() {
         this.velocidad = 5;
@@ -26,6 +26,14 @@ public class Alumno extends Actor
     }
     public void cambiarArma(){
         if(Greenfoot.isKeyDown("e")){
+            Arma arma;
+            if (seleccionador == 0){
+                seleccionador++;
+                arma.selectArma(seleccionador);
+            } else if (seleccionador == 1){
+                seleccionador = 0;
+                arma.selectArma(seleccionador);
+            }
         }
     }
     public void disparar() {

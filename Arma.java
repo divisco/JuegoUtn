@@ -24,7 +24,39 @@ public class Arma extends Actor
         if (getWorld() == null) {
             return;
         }
-        destruirPorColision();
+        if (this.isTouching(Materia.class)) {
+            hacerDanoEnemigo();
+        }
+        if (getWorld() != null) {
+            destruirPorColision();
+        }
+    }
+    public void selectArma(int seleccionador){
+        switch(seleccionador){
+            case 0:
+                if(Goma.class != null){
+                    new Lapiz();
+                } else {
+                    World mundo = getWorld();
+                    mundo.removeObject(Goma); 
+                }
+                break;
+            case 1:
+                if(Lapiz.class != null){
+                    new Goma();
+                } else {
+                    World mundo = getWorld();
+                    mundo.removeObject(Lapiz); 
+                }
+                break;
+        }
+    }
+    public void hacerDanoEnemigo() {
+        Materia materia = (Materia) getOneIntersectingObject(Materia.class);
+        if (materia != null) {
+            World mundo = getWorld();
+            mundo.removeObject(materia);        
+        }
     }
     private void moverHaciaBorde() {
         World mundo = getWorld();
@@ -32,7 +64,9 @@ public class Arma extends Actor
 
         int radioX = getImage().getWidth() / 2;
         int radioY = getImage().getHeight() / 2;
-
+        
+        
+        
         switch (direccionBorde.toUpperCase()) {
             case "DERECHO":
                 int limiteDerecho = mundo.getWidth() - radioX;
