@@ -5,7 +5,6 @@ public class Aula extends World
     private Vida vida = new Vida();
     private Alumno alumno = new Alumno(5,100,5, vida);
     private Contador contador = new Contador();
-    private Inventario inventario = new Inventario();
     private int posicion = 0;
     private int segundosIniciales = 30;
     private Tiempo tiempo = new Tiempo(0);
@@ -19,6 +18,9 @@ public class Aula extends World
             "Recuerda, estamos de tu lado \npero tambien necesitamos de tu voluntad",
             "Up to you!"
     };
+    
+    //Enemigos
+    private EnemigoAM2 am2 = new EnemigoAM2();
     public void limpiarEscenario() {
         List<Actor> todosLosObjetos = getObjects(Actor.class);
         for (Actor objeto : todosLosObjetos) {
@@ -45,9 +47,11 @@ public class Aula extends World
         addObject(banco3, 200, 300);
         addObject(banco4, 400, 300);
     }
+    // Enemigo AM2
     public void nivel1(){
         limpiarEscenario();
         tiempo.contarTiempo(segundosIniciales);
+        addObject(am2, 0, 0);
     }
     public void nivel2(){
         limpiarEscenario();
@@ -94,8 +98,7 @@ public class Aula extends World
         super(600, 400, 1);
         addObject(contador, 530, 20);
         addObject(vida, 60, 20);
-        addObject(inventario, 175, 25);
-        addObject(tiempo, 350, 20);
+        addObject(tiempo, 300, 20);
         setCapas();
         nivel0();
     }
