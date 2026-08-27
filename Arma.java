@@ -21,6 +21,9 @@ public class Arma extends Actor
     public void act()
     {
         moverHaciaBorde();
+        if (getWorld() == null) {
+            return;
+        }
         destruirAlLlegarAlBorde();
     }
     private void moverHaciaBorde() {
@@ -65,16 +68,28 @@ public class Arma extends Actor
         }
     }
     private void destruirAlLlegarAlBorde() {
-        // isAtEdge() detecta cuando toca cualquier extremo del mapa
         World mundo = getWorld();
-        int limiteDerecho = mundo.getWidth() - (getImage().getWidth() / 2);
-        int limiteInferior = mundo.getHeight() - (getImage().getHeight() / 2);
-
-        if (getX() >= limiteDerecho) {
-            getWorld().removeObject(this);
+    
+        // 1. Verificación de seguridad
+        if (mundo == null) {
+            return;
         }
-        if (getY() >= limiteInferior) {
-            getWorld().removeObject(this);
+    
+        int limiteDerecho = mundo.getWidth() - (getImage().getWidth() / 2) - 3;
+        int limiteInferior = mundo.getHeight() - (getImage().getHeight() / 2);
+        int limiteIzquierdo = 20;
+        int limiteSuperior = 20;
+    
+        // 2. Comprobación en eje X
+        if (getX() >= limiteDerecho || getX() <= limiteIzquierdo) {
+            mundo.removeObject(this);
+            return; // Detiene la ejecución aquí
+        }
+    
+        // 3. Comprobación en eje Y
+        if (getY() >= limiteInferior || getY() <= limiteSuperior) {
+            mundo.removeObject(this);
+            return; // Detiene la ejecución aquí
         }
     }
 }
