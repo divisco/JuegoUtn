@@ -24,7 +24,7 @@ public class Arma extends Actor
         if (getWorld() == null) {
             return;
         }
-        destruirAlLlegarAlBorde();
+        destruirPorColision();
     }
     private void moverHaciaBorde() {
         World mundo = getWorld();
@@ -65,6 +65,16 @@ public class Arma extends Actor
                     setLocation(getX(), Math.min(getY() + velocidad, limiteInferior));
                 }
                 break;
+        }
+    }
+    // ESTO PERMITE CONTROLAR SI HACE COLICION CON OTRAS COSAS ANTES QUE CON EL BORDE DEL MUNDO
+    private void destruirPorColision(){
+        if (this.isTouching(Materia.class) || this.isTouching(Profesor.class) || this.isTouching(Decoration.class)){
+            World mundo = getWorld();
+            mundo.removeObject(this);
+            return;
+        } else {
+            destruirAlLlegarAlBorde();
         }
     }
     private void destruirAlLlegarAlBorde() {
