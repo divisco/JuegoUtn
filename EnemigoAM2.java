@@ -7,13 +7,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class EnemigoAM2 extends Materia
-{
-    /**
-     * Act - do whatever the EnemigoAM2 wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+{    
+    public EnemigoAM2(){
+        super("AM2", 1, 1, 1);    
+    }
+    
     public void act()
     {
-        // Add your action code here.
+        super.act(); //permite que se ejecute los metodos heredados de Materia
     }
 }

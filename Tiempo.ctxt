@@ -9,4 +9,6 @@ comment3.params=
 comment3.target=void\ actualizarImagen()
 comment4.params=segundosIniciales
 comment4.target=void\ contarTiempo(int)
-numComments=5
+comment5.params=
+comment5.target=boolean\ estaTerminado()
+numComments=6

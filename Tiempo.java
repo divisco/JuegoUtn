@@ -8,13 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Tiempo extends Actor
 {
-    private int reloj;
-    private int contador;
     private int tiempoRestante;
     private int ciclos;
     
     public Tiempo(int segundosIniciales){
         this.tiempoRestante = segundosIniciales;
+        this.ciclos = 0;
         actualizarImagen();
     }
     
@@ -40,6 +39,10 @@ public class Tiempo extends Actor
                 actualizarImagen();
             }
         }
+    }
+    
+    public boolean estaTerminado(){
+        return this.tiempoRestante <= 0;
     }
     
     
