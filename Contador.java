@@ -17,4 +17,10 @@ public class Contador extends Actor
         puntos++;
         generar();
     }
+    public int getPuntos(){
+        return puntos;
+    }
+    public void decrementarPuntos(int decremento){
+        puntos-=decremento;
+    }
 }

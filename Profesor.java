@@ -4,15 +4,18 @@ public class Profesor extends Actor{
     private String[] contenido;
     private Dialogo dialogo;
     private int tamanoScala = 75;
+    private String nombre;
     
-    public Profesor(String[] contenido){
+    public Profesor(String[] contenido, String nombre, String sprite){
+        this.nombre = nombre;
+        setImage(sprite);
         this.contenido = contenido;
     }
 
     public void hablar() {
         if (isTouching(Alumno.class)) {
             if (dialogo == null || dialogo.getWorld() == null) {
-                dialogo = new Dialogo(this.contenido);
+                dialogo = new Dialogo(this.contenido, nombre);
                 dialogo.cambiarTamano(200, 100);
                 getWorld().addObject(dialogo, getX() + 125, getY() - 50);
                 dialogo.iniciarTexto();
@@ -37,5 +40,8 @@ public class Profesor extends Actor{
     public void act()
     {
         hablar();
+    }
+    public String getNombre(){
+        return nombre;
     }
 }

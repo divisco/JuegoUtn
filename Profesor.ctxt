@@ -1,11 +1,13 @@
 #BlueJ class context
 comment0.target=Profesor
-comment1.params=contenido
-comment1.target=Profesor(java.lang.String[])
+comment1.params=contenido\ nombre\ sprite
+comment1.target=Profesor(java.lang.String[],\ java.lang.String,\ java.lang.String)
 comment2.params=
 comment2.target=void\ hablar()
 comment3.params=
 comment3.target=void\ resize()
 comment4.params=
 comment4.target=void\ act()
-numComments=5
+comment5.params=
+comment5.target=java.lang.String\ getNombre()
+numComments=6

@@ -67,8 +67,6 @@ public class Alumno extends Actor
     }
     
     public void atacarODisparar() {
-        if (!this.tieneArmas) return;
-
         if (this.contadorDisparo >= this.tiempoDisparo) {
             String dir = "";
             int spawnX = getX();
@@ -207,17 +205,20 @@ public class Alumno extends Actor
                 Greenfoot.playSound("desaprobado.mp3");
         
         }
-
-    }
     
-    public void recibirArmas() {
-        this.tieneArmas = true; // O la lógica para habilitar el lápiz y la goma
-        
-        
     }
     //Obtener tipo de arma current
     public int getArma(){
         return tipoArmaEquipada;
+    }
+    //Metodos de incremento de vida y velocidad
+    public void aumentarVida(){
+        int diferencia = 100 - vida;
+        vida+=diferencia;
+        recibirDano(0);
+    }
+    public void aumentarVelocidad(){
+        velocidad+=1;
     }
 }
 

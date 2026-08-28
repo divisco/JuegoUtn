@@ -14,7 +14,7 @@ public class Aula extends World
     private int currentEscenario = 0;
     private int segundosIniciales = 30;
     private int contadorSpawn = 0;
-    private int frecuenciaSpawn = 120; //crea un enemigo cada 2s aprox
+    private int frecuenciaSpawn = 90; //crea un enemigo cada 1.5s aprox
     private boolean nivelActivo = false;
     
     private String[] dialogoNivel1 = { //corresponde al dialogo del nivel 0, por eso queda aca, esto lo dice mario
@@ -32,7 +32,14 @@ public class Aula extends World
             "Si estudiaste 10 horas o mas...",
             "Pudes usarlas para recuperar tu vida",
             "Up to you!",
-            "Presiona la tecla F para \nrecuperar 50 puntos de vida"
+            "Presiona la tecla F para \nrecuperar toda la vida"
+    };
+    private String[] dialogoTiendaSole = {  
+            "¡Hola estudiante!",
+            "¡Superaste la materia con exito!",
+            "Si estudiaste 20 horas o mas...",
+            "Puedes usarla para aumentar tu velocidad",
+            "Presiona la tecla F para \naumenar en 1 tu velocidad"
     };
     
     public Aula()
@@ -69,9 +76,16 @@ public class Aula extends World
     
     public void tienda(){
         limpiarEscenario();
+        alumno.setLocation(300, 200);
         showText("Tienda", 300, 250);
         Greenfoot.delay(150);
         showText("", 300, 250);
+        Profesor mario = new Profesor(dialogoTiendaMario, "Mario", "marioSkin.png");
+        mario.resize();
+        addObject(mario, 200, 100);
+        Profesor sole = new Profesor(dialogoTiendaSole, "Sole", "soleSkin.png");
+        sole.resize();
+        addObject(sole, 400, 100);
         
     }
     // Nivel de inicio con mario
@@ -80,7 +94,7 @@ public class Aula extends World
         alumno.resize();
         addObject(alumno, 300, 300);
         
-        Profesor mario = new Profesor(dialogoNivel1);
+        Profesor mario = new Profesor(dialogoNivel1, "Mario", "marioSkin.png");
         mario.resize();
         addObject(mario, 300, 100);
         
