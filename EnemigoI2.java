@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class EnemigoI2 extends Materia
 {
     public EnemigoI2(){
-        super("Ingles 2", 1, 1, 1);    
+        super("Ingles 2", 20, 1, 1);    
     }
     
     public void act()

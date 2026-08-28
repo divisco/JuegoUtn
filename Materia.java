@@ -16,7 +16,6 @@ public class Materia extends Actor
     private int velocidad;
     private int tiempoAttack = 30;
     private int contadorAttack = 0;
-    private int contadorDañoRecibido = 0;
     //constructor
     public Materia(String nombre, int danio, int vida, int velocidad){
         this.nombre = nombre;
@@ -27,6 +26,7 @@ public class Materia extends Actor
 
     public void act() {
         perseguirJugador();
+        attackAlumno();
         contadorAttack++;
     }
     
@@ -35,12 +35,17 @@ public class Materia extends Actor
     }
     
     public void attackAlumno(){
-        Alumno alumno = new Alumno();
-        if(this.isTouching(Alumno.class) && contadorAttack == tiempoAttack) {
-            contadorDañoRecibido += 20;
-            Alumno.recibirDano(decremento);
+        if(this.isTouching(Alumno.class) && contadorAttack >= tiempoAttack) {
+            
+            // Usamos el método en singular
+            Alumno alumno = (Alumno) getOneIntersectingObject(Alumno.class);
+            
+            // Siempre es buena práctica verificar que no sea nulo antes de hacerle daño
+            if (alumno != null) {
+                alumno.recibirDano(danio);
+                contadorAttack = 0;
+            }
         }
-        contadorAttack = 0;
     }
     
     public void perseguirJugador() {
