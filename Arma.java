@@ -44,6 +44,7 @@ public class Arma extends Actor
             Alumno alumno = (Alumno) aula.getObjects(Alumno.class).get(0);
             if(alumno.getArma()==1){
                 aula.removeObject(this);
+                Greenfoot.playSound("destruirEnemigo.mp3");
             }
         }
     }

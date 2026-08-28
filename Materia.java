@@ -16,6 +16,7 @@ public class Materia extends Actor
     private int velocidad;
     private int tiempoAttack = 30;
     private int contadorAttack = 0;
+    private int tamanoScala = 50;
     //constructor
     public Materia(String nombre, int danio, int vida, int velocidad){
         this.nombre = nombre;
@@ -58,5 +59,11 @@ public class Materia extends Actor
             turnTowards(alumno.getX(), alumno.getY()); // Gira hacia el alumno
             move(this.velocidad);                      // Avanza en esa dirección
         }
+    }
+    
+    public void resize(){
+        GreenfootImage imagen = getImage();
+        imagen.scale(tamanoScala, tamanoScala);
+        setImage(imagen);
     }
 }

@@ -3,6 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Vida extends Actor
 {
     public Vida(){
+        cambiarImagen(10);
         rescalar();
     }
     public void act()

@@ -12,7 +12,7 @@ public class Aula extends World
     
     //controlamos de escenarios y spawn de enemigos
     private int currentEscenario = 0;
-    private int segundosIniciales = 30;
+    private int segundosIniciales = 25;
     private int contadorSpawn = 0;
     private int frecuenciaSpawn = 90; //crea un enemigo cada 1.5s aprox
     private boolean nivelActivo = false;
@@ -58,6 +58,7 @@ public class Aula extends World
             //control de spawn
             this.contadorSpawn ++;
             if (this.contadorSpawn >= this.frecuenciaSpawn * Math.pow(0.9, this.currentEscenario)) { //aca hacemos inicial*porcentaje elevado al nivel
+                spawnEnemigos();
                 spawnEnemigos();
                 this.contadorSpawn = 0;
             }
@@ -155,6 +156,7 @@ public class Aula extends World
         }
         
         //con esto añadimos enemigos en el mundo
+        enemigo.resize();
         addObject(enemigo, x, y);
     }
     
@@ -167,10 +169,11 @@ public class Aula extends World
         this.nivelActivo = true;
     }
     
+    // Victorias y Derrotas
     // Avanzamos al siguiente nivel incluyendo mensajes
     public void siguienteNivel(){
         this.currentEscenario++;
-        
+        // Condicion de victoria
         if(currentEscenario<=8){
             Materia materia = elegirEnemigo();
             showText("NIVEL " + this.currentEscenario, 300, 250);
@@ -180,6 +183,7 @@ public class Aula extends World
             showText("", 300, 250);
             iniciarNivel(this.currentEscenario);
         } else {
+            
             // AL PASAR LOS 8 NIVELES FINALIZA EL JUEGO
             showText("¡FELICITACIONES! AÑO APROBADO", 300, 200);
             Greenfoot.delay(100);
@@ -195,6 +199,20 @@ public class Aula extends World
                 removeObject(objeto);
             }
         }
+    }
+    
+    //condicion de derrota, si la vida es 0, se activa este metodo y tiene que recursar el nivel
+    public void recursarNivel(){
+        this.currentEscenario--;
+        Desaprobaste desaprobaste = new Desaprobaste();
+        Greenfoot.delay(100);
+        showText("TIENES QUE RECURSAR LA MATERIA", 300, 250);
+        Greenfoot.delay(50);
+        showText("", 300, 250);
+        removeObject(desaprobaste);
+        limpiarEscenario();
+        //vuelve a hacer el mismo nivel
+        siguienteNivel();
     }
     
     public void setCapas(){

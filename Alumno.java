@@ -19,7 +19,7 @@ public class Alumno extends Actor
     //CONSTRUCTOR
     public Alumno() {
         this.velocidad = 5;
-        this.vida = 80;
+        this.vida = 100;
         this.fuerza = 10;
         setImage("alumnoFrente.png");
     }
@@ -193,17 +193,28 @@ public class Alumno extends Actor
     
        // Actualiza el sprite de la barra de vida (ej: vida4.png, vida3.png...)
        if (barraVida != null) {
-           if(vida>=100){ barraVida.cambiarImagen(1);}
-           if(vida<100){ barraVida.cambiarImagen(2);}
-           if(vida<80){ barraVida.cambiarImagen(3); }
-           if(vida<60){ barraVida.cambiarImagen(4); }
-           if(vida<40){ barraVida.cambiarImagen(5); }
-           if(vida<=0){ barraVida.cambiarImagen(6); }
+           if(vida>=100){ barraVida.cambiarImagen(10);}
+           if(vida<100){ barraVida.cambiarImagen(10);}
+           if(vida<90){ barraVida.cambiarImagen(9); }
+           if(vida<80){ barraVida.cambiarImagen(8); }
+           if(vida<70){ barraVida.cambiarImagen(7); }
+           if(vida<60){ barraVida.cambiarImagen(6); }
+           if(vida<50){ barraVida.cambiarImagen(5); }
+           if(vida<40){ barraVida.cambiarImagen(4); }
+           if(vida<30){ barraVida.cambiarImagen(3); }
+           if(vida<20){ barraVida.cambiarImagen(2); }
+           if(vida<10){ barraVida.cambiarImagen(1); }
+           if(vida<=0){ barraVida.cambiarImagen(0); }
        } 
        
        if (barraVida !=null){
-                Greenfoot.playSound("desaprobado.mp3");
+                Greenfoot.playSound("dañoVida.mp3");
         
+        }
+        
+        if (vida == 0){
+            Aula aula = new Aula();
+            aula.recursarNivel();
         }
     
     }
@@ -217,8 +228,9 @@ public class Alumno extends Actor
         vida+=diferencia;
         recibirDano(0);
     }
+    
     public void aumentarVelocidad(){
-        velocidad+=1;
+        this.velocidad+=1;
     }
 }
 

@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class EnemigoSSL extends Materia
 {
     public EnemigoSSL(){
-        super("Sintaxis y Semantica del Lenguaje", 1, 1, 2);    
+        super("Sintaxis y Semantica del Lenguaje", 4, 1, 2);    
     }
     
     public void act()
