@@ -70,6 +70,10 @@ public class Aula extends World
             Profesor sole = new Profesor(getDialogoSoleTienda(), "Sole", "soleSkin.png");
             sole.resize();
             addObject(sole, 380, 100);
+            Decoration planta1 = (Planta) new Planta();
+            addObject(planta1, 100, 300);
+            Decoration planta2 = (Planta) new Planta();
+            addObject(planta2, 500, 300);
         }      
     }
     // Nivel de inicio con mario

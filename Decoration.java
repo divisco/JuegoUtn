@@ -14,9 +14,9 @@ public class Decoration extends Actor
     {
         // Add your action code here.
     }
-    public void resize(int newTamano){
+    public void resize(int newWidthSize, int newHeightSize){
         GreenfootImage imagen = getImage();
-        imagen.scale(newTamano,newTamano);
+        imagen.scale(newWidthSize,newHeightSize);
         setImage(imagen);
     }
 }

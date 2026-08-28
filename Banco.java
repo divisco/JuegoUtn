@@ -11,7 +11,7 @@ public class Banco extends Decoration
     public Banco(){
         int bancoType = Greenfoot.getRandomNumber(5);
         setImage("bancoImg"+bancoType+".png");
-        resize(75);
+        resize(75,75);
     }
     public void act()
     {
