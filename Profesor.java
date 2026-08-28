@@ -4,7 +4,7 @@ public class Profesor extends Actor{
     private String[] contenido;
     private Dialogo dialogo;
     private int tamanoScala = 75;
-
+    
     public Profesor(String[] contenido){
         this.contenido = contenido;
     }
@@ -37,6 +37,5 @@ public class Profesor extends Actor{
     public void act()
     {
         hablar();
-        resize();
     }
 }

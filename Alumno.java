@@ -215,5 +215,9 @@ public class Alumno extends Actor
         
         
     }
+    //Obtener tipo de arma current
+    public int getArma(){
+        return tipoArmaEquipada;
+    }
 }
 

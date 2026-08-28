@@ -38,7 +38,13 @@ public class Arma extends Actor
         Materia materia = (Materia) getOneIntersectingObject(Materia.class);
         if (materia != null) {
             World mundo = getWorld();
-            mundo.removeObject(materia);        
+            Aula aula = (Aula) getWorld();
+            aula.sumarHsEstudio();
+            mundo.removeObject(materia);
+            Alumno alumno = (Alumno) aula.getObjects(Alumno.class).get(0);
+            if(alumno.getArma()==1){
+                aula.removeObject(this);
+            }
         }
     }
     

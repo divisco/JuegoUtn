@@ -15,5 +15,6 @@ public class Contador extends Actor
     }
     public void sumarPuntos(){
         puntos++;
+        generar();
     }
 }

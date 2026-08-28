@@ -26,6 +26,14 @@ public class Aula extends World
             "Recuerda, estamos de tu lado \npero tambien necesitamos de tu voluntad",
             "Up to you!"
     };
+    private String[] dialogoTiendaMario = { // Es el dialogo default que dice mario en la tienda
+            "¡Hola de nuevo!",
+            "¡Superaste la materia con exito!",
+            "Si estudiaste 10 horas o mas...",
+            "Pudes usarlas para recuperar tu vida",
+            "Up to you!",
+            "Presiona la tecla F para \nrecuperar 50 puntos de vida"
+    };
     
     public Aula()
     {    
@@ -50,12 +58,23 @@ public class Aula extends World
             //control de fin de nivel por el tiempo
             if (this.tiempo.estaTerminado()) {
                 this.nivelActivo = false;
-                siguienteNivel(); //ACA VA LA TIENDA
+                tienda();
             }
         }
     }
     
     // PRESENTACION JUEGO
+    
+    // Tienda accesible para comprar
+    
+    public void tienda(){
+        limpiarEscenario();
+        showText("Tienda", 300, 250);
+        Greenfoot.delay(150);
+        showText("", 300, 250);
+        
+    }
+    // Nivel de inicio con mario
     public void nivel0(){
         //incializamos al alumno
         alumno.resize();
@@ -166,5 +185,9 @@ public class Aula extends World
     
     public void setCapas(){
         setPaintOrder(Texto.class, Dialogo.class, Tiempo.class, Contador.class,Banco.class,Vida.class, Lapiz.class, Alumno.class, Goma.class, Profesor.class);
+    }
+    //Metodo utilizado por arma para indicar que la suma de horas de estudio
+    public void sumarHsEstudio(){
+        contador.sumarPuntos();
     }
 }
