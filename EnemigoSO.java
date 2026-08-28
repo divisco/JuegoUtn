@@ -1,15 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EnemigoF2 here.
+ * Write a description of class EnemigoPP here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class EnemigoF2 extends Materia
+public class EnemigoSO extends Materia
 {
-    public EnemigoF2(){
-        super("Fisica 2", 1, 1, 3);    
+    public EnemigoSO(){
+        super("Sistemas Operativos", 1, 1, 2);    
     }
     
     public void act()

@@ -57,7 +57,7 @@ public class Aula extends World
         if (this.nivelActivo) {
             //control de spawn
             this.contadorSpawn ++;
-            if (this.contadorSpawn >= this.frecuenciaSpawn) {
+            if (this.contadorSpawn >= this.frecuenciaSpawn * Math.pow(0.9, this.currentEscenario)) { //aca hacemos inicial*porcentaje elevado al nivel
                 spawnEnemigos();
                 this.contadorSpawn = 0;
             }
@@ -114,11 +114,11 @@ public class Aula extends World
         switch (this.currentEscenario) {
             case 1: return new EnemigoI2();
             case 2: return new EnemigoIS();
-            //case 3: return new EnemigoSO();
-            //case 4: return new EnemigoSSL();
+            case 3: return new EnemigoSO();
+            case 4: return new EnemigoSSL();
             case 5: return new EnemigoF2();
             case 6: return new EnemigoAM2();
-            //case 7: return new EnemigoASI();
+            case 7: return new EnemigoASI();
             case 8: return new EnemigoPP();
             default: return null;
         }
@@ -203,5 +203,9 @@ public class Aula extends World
     //Metodo utilizado por arma para indicar que la suma de horas de estudio
     public void sumarHsEstudio(){
         contador.sumarPuntos();
+    }
+    
+    public int getCurrentEscenario(){
+        return this.currentEscenario;
     }
 }
