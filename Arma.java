@@ -8,19 +8,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Arma extends Actor
 {
-    /**
-     * Act - do whatever the Arma wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    private int velocidad = 3;
+    //ATIBUTOS
+    private int velocidad;
     private String direccionBorde;
     
-    public Arma(String direccionBorde) {
+    //CONSTUCTOR
+    public Arma(String direccionBorde, int velocidad) {
+        this.velocidad = velocidad;
         this.direccionBorde = direccionBorde;
+        rotarDireccion();
     }
+    
     public void act()
     {
-        moverHaciaBorde();
+        moverHaciaBorde(direccionBorde);
         if (getWorld() == null) {
             return;
         }
@@ -31,26 +32,8 @@ public class Arma extends Actor
             destruirPorColision();
         }
     }
-    public void selectArma(int seleccionador){
-        switch(seleccionador){
-            case 0:
-                if(Goma.class != null){
-                    new Lapiz();
-                } else {
-                    World mundo = getWorld();
-                    mundo.removeObject(Goma); 
-                }
-                break;
-            case 1:
-                if(Lapiz.class != null){
-                    new Goma();
-                } else {
-                    World mundo = getWorld();
-                    mundo.removeObject(Lapiz); 
-                }
-                break;
-        }
-    }
+    
+    //METODOS
     public void hacerDanoEnemigo() {
         Materia materia = (Materia) getOneIntersectingObject(Materia.class);
         if (materia != null) {
@@ -58,14 +41,14 @@ public class Arma extends Actor
             mundo.removeObject(materia);        
         }
     }
-    private void moverHaciaBorde() {
+    
+    private void moverHaciaBorde(String direccionBorde) {
         World mundo = getWorld();
         if (mundo == null) return;
+        if (direccionBorde == null){ direccionBorde = "UP"; }
 
         int radioX = getImage().getWidth() / 2;
         int radioY = getImage().getHeight() / 2;
-        
-        
         
         switch (direccionBorde.toUpperCase()) {
             case "DERECHO":
@@ -101,6 +84,28 @@ public class Arma extends Actor
                 break;
         }
     }
+    
+    //este metodo es para rotar visualmente las armas
+    private void rotarDireccion(){
+        if (this.direccionBorde == null) return;
+        //las rotaciones tienen +35 por la inclinacion del .png
+        switch (this.direccionBorde.toUpperCase()) {
+            case "DERECHO":
+                setRotation(44);
+                break;
+            case "DOWN":
+                setRotation(134);
+                break;
+            case "IZQUIERDO":
+                setRotation(224);
+                break;
+            case "UP":
+                setRotation(314);
+                break;
+        }
+        
+    }
+    
     // ESTO PERMITE CONTROLAR SI HACE COLICION CON OTRAS COSAS ANTES QUE CON EL BORDE DEL MUNDO
     private void destruirPorColision(){
         if (this.isTouching(Materia.class) || this.isTouching(Profesor.class) || this.isTouching(Decoration.class)){
@@ -111,6 +116,7 @@ public class Arma extends Actor
             destruirAlLlegarAlBorde();
         }
     }
+    
     private void destruirAlLlegarAlBorde() {
         World mundo = getWorld();
     

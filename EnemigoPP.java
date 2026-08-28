@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class EnemigoPP extends Materia
 {
     public EnemigoPP(){
-        super("AM2", 1, 1, 1);    
+        super("Paradigma de Programacion", 1, 1, 1);    
     }
     
     public void act()

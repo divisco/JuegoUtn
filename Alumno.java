@@ -1,62 +1,102 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Alumno extends Actor
 {
+    //atributos del alumno
     private int velocidad;
     private int vida;
     private Vida barraVida;
     private int fuerza;
     private int tamanoScala = 75;
     private int margenContacto = 10;
-    private boolean tieneArmas = false;
+    
+    //Armas y disparo de la goma
+    private boolean tieneArmas = true;
     private int tiempoDisparo = 30;
     private int contadorDisparo = 0;
-    private int seleccionador = 0;
+    private int tipoArmaEquipada = 0; // 0 es lapiz, 1 es goma
+    private boolean teclaPresionada = false; // cortamos el bucle de mantener presionada E
      
+    //CONSTRUCTOR
     public Alumno() {
         this.velocidad = 5;
         this.vida = 100;
         this.fuerza = 10;
         setImage("alumnoFrente.png");
     }
+    
     public Alumno(int velocidad, int vida, int fuerza, Vida barraVida){
         this.velocidad = velocidad;
         this.vida=vida;
         this.fuerza=fuerza;
         this.barraVida = barraVida;
+        setImage("alumnoFrente.png");
     }
+    
+    public void act()
+    {
+        //movimiento
+        movimientoRight();
+        movimientoLeft();
+        movimientoUp();
+        movimientoDown();
+        //combate
+        cambiarArma();
+        atacarODisparar();
+        contadorDisparo++;
+    }
+    
+    //METODOS
     public void cambiarArma(){
+        //controlador para la tecla e
         if(Greenfoot.isKeyDown("e")){
-            Arma arma;
-            if (seleccionador == 0){
-                seleccionador++;
-                arma.selectArma(seleccionador);
-            } else if (seleccionador == 1){
-                seleccionador = 0;
-                arma.selectArma(seleccionador);
+            if(!this.teclaPresionada){ // se activa una sola vez al pulsar la tecla e
+                this.tipoArmaEquipada = (this.tipoArmaEquipada == 0) ? 1:0; //
+                this.teclaPresionada = true;
             }
+        } else {
+            this.teclaPresionada = false; // se libera al soltar la tecla
         }
     }
-    public void disparar() {
-        if(contadorDisparo >= tiempoDisparo){
+    
+    private Arma crearProyectil(String direccion) {
+        if (this.tipoArmaEquipada == 0) {
+            return new Lapiz(direccion);
+        } else {
+            return new Goma(direccion);
+        }
+    }
+    
+    public void atacarODisparar() {
+        if (!this.tieneArmas) return;
+
+        if (this.contadorDisparo >= this.tiempoDisparo) {
+            String dir = "";
+            int spawnX = getX();
+            int spawnY = getY();
+            int offset = 40; // Distancia frente al alumno
+
             if (Greenfoot.isKeyDown("up")) {
-                Arma arma = new Arma("UP"); 
-                getWorld().addObject(arma, getX(), getY());
+                dir = "UP";
+                spawnY -= offset;
+            } else if (Greenfoot.isKeyDown("down")) {
+                dir = "DOWN";
+                spawnY += offset;
+            } else if (Greenfoot.isKeyDown("left")) {
+                dir = "IZQUIERDO";
+                spawnX -= offset;
+            } else if (Greenfoot.isKeyDown("right")) {
+                dir = "DERECHO";
+                spawnX += offset;
             }
-            if (Greenfoot.isKeyDown("down")) {
-                Arma arma = new Arma("DOWN"); 
-                getWorld().addObject(arma, getX(), getY());
+
+            if (!dir.isEmpty()) {
+                Arma arma = crearProyectil(dir);
+                getWorld().addObject(arma, spawnX, spawnY);
+                this.contadorDisparo = 0;
             }
-            if (Greenfoot.isKeyDown("left")) {
-                Arma arma = new Arma("IZQUIERDO"); 
-                getWorld().addObject(arma, getX(), getY());
-            }
-            if (Greenfoot.isKeyDown("right")) {
-                Arma arma = new Arma("DERECHO"); 
-                getWorld().addObject(arma, getX(), getY());
-            }
-            contadorDisparo = 0;
         }
     }
+    
     public void movimientoRight(){
         if(Greenfoot.isKeyDown("d")){
             intentarMover(getX() + velocidad, getY());
@@ -64,6 +104,7 @@ public class Alumno extends Actor
             resize();  
         }
     }
+    
     public void movimientoLeft(){
         if(Greenfoot.isKeyDown("a")){
             intentarMover(getX() - velocidad, getY());
@@ -71,6 +112,7 @@ public class Alumno extends Actor
             resize();
         }
     }
+    
     public void movimientoUp(){
         if(Greenfoot.isKeyDown("w")){
             intentarMover(getX(), getY() - velocidad);
@@ -78,6 +120,7 @@ public class Alumno extends Actor
             resize();
         }
     }
+    
     public void movimientoDown(){
         if(Greenfoot.isKeyDown("s")){
             intentarMover(getX(), getY() + velocidad);
@@ -119,6 +162,7 @@ public class Alumno extends Actor
         }
         return false;
     }
+    
     private void intentarMover(int nuevaX, int nuevaY) {
         int oldX = getX();
         int oldY = getY();
@@ -141,34 +185,16 @@ public class Alumno extends Actor
             setLocation(oldX, oldY);
         }
     }
-    public void act()
-    {
-        movimientoRight();
-        movimientoLeft();
-        movimientoUp();
-        movimientoDown();
-        disparar();
-        contadorDisparo++;
-    }
+    
     public void recibirDano(int decremento){
         vida = vida-decremento;
         if (barraVida !=null){
             Greenfoot.playSound("desaprobado.mp3");
-            if(vida<100){
-                barraVida.cambiarImagen(2);
-            }
-            if(vida<80){
-                barraVida.cambiarImagen(3);
-            }
-            if(vida<60){
-                barraVida.cambiarImagen(4);
-            }
-            if(vida<40){
-                barraVida.cambiarImagen(5);
-            }
-            if(vida<=0){
-                barraVida.cambiarImagen(6);
-            }
+            if(vida<100){ barraVida.cambiarImagen(2); }
+            if(vida<80){ barraVida.cambiarImagen(3); }
+            if(vida<60){ barraVida.cambiarImagen(4); }
+            if(vida<40){ barraVida.cambiarImagen(5); }
+            if(vida<=0){ barraVida.cambiarImagen(6); }
  
        }
     }

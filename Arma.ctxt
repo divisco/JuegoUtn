@@ -1,16 +1,18 @@
 #BlueJ class context
 comment0.target=Arma
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Arma\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=direccionBorde
-comment1.target=Arma(java.lang.String)
+comment1.params=direccionBorde\ velocidad
+comment1.target=Arma(java.lang.String,\ int)
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ hacerDanoEnemigo()
-comment4.params=
-comment4.target=void\ moverHaciaBorde()
+comment4.params=direccionBorde
+comment4.target=void\ moverHaciaBorde(java.lang.String)
 comment5.params=
-comment5.target=void\ destruirPorColision()
+comment5.target=void\ rotarDireccion()
 comment6.params=
-comment6.target=void\ destruirAlLlegarAlBorde()
-numComments=7
+comment6.target=void\ destruirPorColision()
+comment7.params=
+comment7.target=void\ destruirAlLlegarAlBorde()
+numComments=8

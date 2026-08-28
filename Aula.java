@@ -50,7 +50,7 @@ public class Aula extends World
             //control de fin de nivel por el tiempo
             if (this.tiempo.estaTerminado()) {
                 this.nivelActivo = false;
-                siguienteNivel();
+                siguienteNivel(); //ACA VA LA TIENDA
             }
         }
     }
@@ -79,14 +79,14 @@ public class Aula extends World
     //Enemigos segun nivel actual
     private Materia elegirEnemigo(){
         switch (this.currentEscenario) {
-            case 1: return new EnemigoAM2();
+            case 1: return new EnemigoI2();
             case 2: return new EnemigoIS();
-            case 3: return new EnemigoPP();
-            // case 4: return new EnemigoSSL();
-            // case 5: return new EnemigoF2();
-            // case 6: return new EnemigoSO();
-            // case 7: return new EnemigoASI();
-            // case 8: return new EnemigoI2();
+            //case 3: return new EnemigoSO();
+            //case 4: return new EnemigoSSL();
+            case 5: return new EnemigoF2();
+            case 6: return new EnemigoAM2();
+            //case 7: return new EnemigoASI();
+            case 8: return new EnemigoPP();
             default: return null;
         }
     }
@@ -121,6 +121,7 @@ public class Aula extends World
                 break;
         }
         
+        //con esto añadimos enemigos en el mundo
         addObject(enemigo, x, y);
     }
     
@@ -129,7 +130,7 @@ public class Aula extends World
         limpiarEscenario();
         this.currentEscenario = nivel;
         this.contadorSpawn = 0;
-        this.tiempo.contarTiempo(this.segundosIniciales);
+        this.tiempo.contarTiempo(this.segundosIniciales * nivel);
         this.nivelActivo = true;
     }
     
@@ -138,9 +139,10 @@ public class Aula extends World
         this.currentEscenario++;
         
         if(currentEscenario<=8){
-            showText("BIENVENIDO A LA SIGUIENTE MATERIA", 300, 250);
-            Greenfoot.delay(100);
+            Materia materia = elegirEnemigo();
             showText("NIVEL " + this.currentEscenario, 300, 250);
+            Greenfoot.delay(100);
+            showText(materia.getNombre().toUpperCase(), 300, 250);
             Greenfoot.delay(100);
             showText("", 300, 250);
             iniciarNivel(this.currentEscenario);
@@ -163,6 +165,6 @@ public class Aula extends World
     }
     
     public void setCapas(){
-        setPaintOrder(Texto.class,Dialogo.class, Tiempo.class, Contador.class,Banco.class,Vida.class, Alumno.class, Profesor.class);
+        setPaintOrder(Texto.class, Dialogo.class, Tiempo.class, Contador.class,Banco.class,Vida.class, Lapiz.class, Alumno.class, Goma.class, Profesor.class);
     }
 }

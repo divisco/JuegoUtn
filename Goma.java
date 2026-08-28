@@ -8,17 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Goma extends Arma
 {
-    /**
-     * Act - do whatever the Goma wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
-        setImage("Goma.png");
-    }
-    
     public Goma(String direccionBorde) {
-        super(direccionBorde); // Llama al constructor de Arma
+        super(direccionBorde, 6); // Llama al constructor de Arma
+        GreenfootImage img = new GreenfootImage("Goma.png");
+        img.scale(30, 30); // Ajustá el tamaño adecuado
+        setImage(img);
     }
 }

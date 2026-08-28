@@ -27,23 +27,9 @@ public class Materia extends Actor
         perseguirJugador();
     }
     
-    //metodos
- /**   public void perseguirJugador(Alumno alumno){
-        //guardamos el calculo de la diferencia entre la x e y del alumno y la materia
-        int calX = alumno.getX() - this.getX();
-        int calY = alumno.getY() - this.getY();
-        
-        //calculamos la distancia total usando Pitagoras
-        double distancia = Math.sqrt((posX * posX) + (posY * posY));
-        
-        //Mover solo si no est[an en el mismo punto
-        if (distancia > 0){            
-            int nuevaX = (int) Math.round(this.getX() + (calX / distancia) * this.velocidad);
-            int nuevaY = (int) Math.round(this.getY() + (calY / distancia) * this.velocidad);
-            
-            this.setLocation(nuevaX, nuevaY);
-        }
-    } */
+    public String getNombre(){
+        return this.nombre;
+    }
     
     public void perseguirJugador() {
         // Obtenemos la lista de alumnos en el mundo

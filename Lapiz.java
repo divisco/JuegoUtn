@@ -8,15 +8,27 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Lapiz extends Arma
 {
-    /**
-     * Act - do whatever the Lapiz wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        setImage("Lapiz.pgn");
-    }
+    private int duracionGolpe = 10; //10 frames que permanece visible en pantalla
+    
+    //Constructor
     public Lapiz(String direccionBorde) {
-        super(direccionBorde); // Llama al constructor de Arma
+        super(direccionBorde, 0); // Llama al constructor de Arma
+        GreenfootImage img = new GreenfootImage("Lapiz.png");
+        img.scale(35, 35);
+        setImage(img);
+    }
+    
+    public void act() {
+        if (this.isTouching(Materia.class)) {
+            hacerDanoEnemigo();
+        }
+
+        this.duracionGolpe--;
+        if (this.duracionGolpe <= 0) {
+            World mundo = getWorld();
+            if (mundo != null) {
+                mundo.removeObject(this);
+            }
+        }
     }
 }

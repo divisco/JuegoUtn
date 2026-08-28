@@ -6,6 +6,7 @@ comment1.target=Materia(java.lang.String,\ int,\ int,\ int)
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
-comment3.target=void\ perseguirJugador()
-comment3.text=\ \ \ public\ void\ perseguirJugador(Alumno\ alumno){\r\n\ \ \ \ \ \ \ \ //guardamos\ el\ calculo\ de\ la\ diferencia\ entre\ la\ x\ e\ y\ del\ alumno\ y\ la\ materia\r\n\ \ \ \ \ \ \ \ int\ calX\ \=\ alumno.getX()\ -\ this.getX();\r\n\ \ \ \ \ \ \ \ int\ calY\ \=\ alumno.getY()\ -\ this.getY();\r\n\ \ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ //calculamos\ la\ distancia\ total\ usando\ Pitagoras\r\n\ \ \ \ \ \ \ \ double\ distancia\ \=\ Math.sqrt((posX\ *\ posX)\ +\ (posY\ *\ posY));\r\n\ \ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ //Mover\ solo\ si\ no\ est[an\ en\ el\ mismo\ punto\r\n\ \ \ \ \ \ \ \ if\ (distancia\ >\ 0){\ \ \ \ \ \ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ \ \ \ \ int\ nuevaX\ \=\ (int)\ Math.round(this.getX()\ +\ (calX\ /\ distancia)\ *\ this.velocidad);\r\n\ \ \ \ \ \ \ \ \ \ \ \ int\ nuevaY\ \=\ (int)\ Math.round(this.getY()\ +\ (calY\ /\ distancia)\ *\ this.velocidad);\r\n\ \ \ \ \ \ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ \ \ \ \ this.setLocation(nuevaX,\ nuevaY);\r\n\ \ \ \ \ \ \ \ }\r\n}
-numComments=4
+comment3.target=java.lang.String\ getNombre()
+comment4.params=
+comment4.target=void\ perseguirJugador()
+numComments=5
