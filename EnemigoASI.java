@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class EnemigoASI extends Materia
 {
     public EnemigoASI(){
-        super("Analisis de Sistemas de Informacion", 8, 1, 4);    
+        super("Analisis de Sistemas de Informacion", 4, 1, 4);    
     }
     
     public void act()

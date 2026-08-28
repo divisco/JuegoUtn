@@ -14,7 +14,7 @@ public class Aula extends World
     private int currentEscenario = 0;
     private int segundosIniciales = 25;
     private int contadorSpawn = 0;
-    private int frecuenciaSpawn = 90; //crea un enemigo cada 1.5s aprox
+    private int frecuenciaSpawn = 60; //crea un enemigo cada 1s aprox
     private boolean nivelActivo = false;
     
     private String[] dialogoNivel1 = { //corresponde al dialogo del nivel 0, por eso queda aca, esto lo dice mario
@@ -42,6 +42,14 @@ public class Aula extends World
             "Presiona la tecla F para \naumenar en 1 tu velocidad"
     };
     
+    private String[] dialogoFinalMario = {
+        
+    };
+    
+    private String[] dialogoFinalSole = {  
+        
+    };
+    
     public Aula()
     {    
         super(600, 400, 1);
@@ -57,7 +65,7 @@ public class Aula extends World
         if (this.nivelActivo) {
             //control de spawn
             this.contadorSpawn ++;
-            if (this.contadorSpawn >= this.frecuenciaSpawn * Math.pow(0.9, this.currentEscenario)) { //aca hacemos inicial*porcentaje elevado al nivel
+            if (this.contadorSpawn >= this.frecuenciaSpawn * Math.pow(1.1, this.currentEscenario)) { //aca hacemos inicial*porcentaje elevado al nivel
                 spawnEnemigos();
                 spawnEnemigos();
                 this.contadorSpawn = 0;

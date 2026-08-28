@@ -58,8 +58,11 @@ public class Dialogo extends Actor
                 Alumno alumno = (Alumno) getWorld().getObjects(Alumno.class).get(0);
                 Contador contador = (Contador) getWorld().getObjects(Contador.class).get(0);
                 Aula aula = (Aula) getWorld();
-                int valorVida = (int) Math.round((10.0 * Math.pow(1.3, (aula.getCurrentEscenario() - 1))));
-                int valorVelocidad = (int) Math.round((15.0 * Math.pow(1.3, (aula.getCurrentEscenario() - 1))));
+                
+                // valorInicial * porcentaje ** (numeroNivel - 1)
+                int valorVida = (int) Math.round((10.0 * Math.pow(1.2, (aula.getCurrentEscenario() - 1))));
+                int valorVelocidad = (int) Math.round((15.0 * Math.pow(1.2, (aula.getCurrentEscenario() - 1))));
+                
                 if(contador.getPuntos()!=0){
                     if(nameProfe.equalsIgnoreCase("Mario")){
                         if(contador.getPuntos()>=valorVida){

@@ -6,7 +6,8 @@ public class Alumno extends Actor
     private int vida;
     private Vida barraVida;
     private int fuerza;
-    private int tamanoScala = 75;
+    private int anchoScala = 65;
+    private int altoScala = 45;
     private int margenContacto = 10;
     
     //Armas y disparo de la goma
@@ -135,7 +136,7 @@ public class Alumno extends Actor
     
     public void resize(){
         GreenfootImage imagen = getImage();
-        imagen.scale(tamanoScala,tamanoScala);
+        imagen.scale(altoScala, anchoScala);
         setImage(imagen);
     }
     
@@ -146,8 +147,8 @@ public class Alumno extends Actor
             int distX = Math.abs(getX() - prof.getX());
             int distY = Math.abs(getY() - prof.getY());
             
-            int limiteX = (getImage().getWidth() / 2) + (prof.getImage().getWidth() / 2) - margenContacto - 30;
-            int limiteY = (getImage().getHeight() / 2) + (prof.getImage().getHeight() / 2) - margenContacto;
+            int limiteX = (getImage().getWidth()) + (prof.getImage().getWidth()) - margenContacto - 30;
+            int limiteY = (getImage().getHeight() - 40) + (prof.getImage().getHeight() - 40) - margenContacto;
 
             if (distX < limiteX && distY < limiteY) {
                 return true;
@@ -157,8 +158,8 @@ public class Alumno extends Actor
             int distX = Math.abs(getX() - banco.getX());
             int distY = Math.abs(getY() - banco.getY());
             
-            int limiteX = (getImage().getWidth() / 2) + (banco.getImage().getWidth() / 2) - margenContacto - 30;
-            int limiteY = (getImage().getHeight() / 2) + (banco.getImage().getHeight() / 2) - margenContacto - 20;
+            int limiteX = (getImage().getWidth() - 20) + (banco.getImage().getWidth() - 20) - margenContacto - 30;
+            int limiteY = (getImage().getHeight() - 20) + (banco.getImage().getHeight() - 30) - margenContacto - 20;
 
             if (distX < limiteX && distY < limiteY) {
                 return true;
