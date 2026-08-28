@@ -85,7 +85,7 @@ public class Aula extends World
         addObject(mario, 200, 100);
         Profesor sole = new Profesor(dialogoTiendaSole, "Sole", "soleSkin.png");
         sole.resize();
-        addObject(sole, 400, 100);
+        addObject(sole, 380, 100);
         
     }
     // Nivel de inicio con mario

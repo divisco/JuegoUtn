@@ -58,23 +58,37 @@ public class Dialogo extends Actor
                 Alumno alumno = (Alumno) getWorld().getObjects(Alumno.class).get(0);
                 Contador contador = (Contador) getWorld().getObjects(Contador.class).get(0);
                 if(contador.getPuntos()!=0){
-                    if(nameProfe.equalsIgnoreCase("Mario")  && contador.getPuntos()>=10){
-                        getWorld().showText("Recibes vida!", 300, 250);
-                        Greenfoot.delay(50);
-                        getWorld().showText("", 300, 250);
-                        alumno.aumentarVida();
-                        contador.decrementarPuntos(10);
+                    if(nameProfe.equalsIgnoreCase("Mario")){
+                        if(contador.getPuntos()>=10){
+                            contador.decrementarPuntos(10);
+                            getWorld().showText("Recibes vida!", 300, 250);
+                            Greenfoot.delay(50);
+                            getWorld().showText("", 300, 250);
+                            alumno.aumentarVida();
+                            ((Aula) getWorld()).siguienteNivel();
+                        } else {
+                            getWorld().showText("No cuentas con las 10 horas de estudio", 300, 250);
+                            Greenfoot.delay(30);
+                            getWorld().showText("", 300, 250);
+                        }
                     }
-                    else if(nameProfe.equalsIgnoreCase("Sole") && contador.getPuntos()>=20){
-                        getWorld().showText("Recibes velocidad!", 300, 250);
-                        Greenfoot.delay(50);
-                        getWorld().showText("", 300, 250);
-                        alumno.aumentarVelocidad();
-                        contador.decrementarPuntos(20);
+                    if(nameProfe.equalsIgnoreCase("Sole")){
+                        if (contador.getPuntos()>=15){
+                            contador.decrementarPuntos(15);
+                            getWorld().showText("Recibes velocidad!", 300, 250);
+                            Greenfoot.delay(50);
+                            getWorld().showText("", 300, 250);
+                            alumno.aumentarVelocidad();
+                            ((Aula) getWorld()).siguienteNivel();
+                        } else {
+                            getWorld().showText("No cuentas con las 20 horas de estudio", 300, 250);
+                            Greenfoot.delay(30);
+                            getWorld().showText("", 300, 250);
+                        }
                     }
-                    
+                } else {
+                    ((Aula) getWorld()).siguienteNivel();
                 }
-                ((Aula) getWorld()).siguienteNivel();
                 eliminarse();
             }
         }

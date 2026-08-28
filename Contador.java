@@ -22,5 +22,6 @@ public class Contador extends Actor
     }
     public void decrementarPuntos(int decremento){
         puntos-=decremento;
+        generar();
     }
 }
