@@ -163,7 +163,7 @@ public class Aula extends World
         limpiarEscenario();
         this.currentEscenario = nivel;
         this.contadorSpawn = 0;
-        this.tiempo.contarTiempo(this.segundosIniciales * nivel);
+        this.tiempo.contarTiempo(this.segundosIniciales + (5 * this.currentEscenario));
         this.nivelActivo = true;
     }
     
