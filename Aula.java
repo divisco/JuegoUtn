@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
+
 public class Aula extends World
 {
     //Todos estos atributos los podemos llamar con un this. de ser necesario, ya que son globales
@@ -299,5 +300,15 @@ public class Aula extends World
             "¡Te felicito por esforzarte \nen cada momento!",
             "Recuerda siempre:\n \nSi lo puedes imaginar, \nlo puedes programar"
         };
+    }
+
+    // --- MÉTODOS DE CONEXIÓN CON CONTADOR ---
+
+    public int getHorasEstudio() {
+        return this.contador.getPuntos();
+    }
+
+    public void descontarHorasEstudio(int cantidad) {
+        this.contador.decrementarPuntos(cantidad);
     }
 }
