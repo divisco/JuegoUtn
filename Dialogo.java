@@ -45,6 +45,15 @@ public class Dialogo extends Actor
         imagenBase = getImage();
     }
     
+    public int[] calcularValores(){
+        Aula aula = (Aula) getWorld();
+        // valorInicial * porcentaje ** (numeroNivel - 1)
+        int valorVida = (int) Math.round((10.0 * Math.pow(1.2, (aula.getCurrentEscenario() - 1))));
+        int valorVelocidad = (int) Math.round((15.0 * Math.pow(1.2, (aula.getCurrentEscenario() - 1))));
+        int[] valores = {valorVida, valorVelocidad};
+        return valores;
+    }
+   
     public void cambiarDialogo() {
         if (Greenfoot.isKeyDown("f") && !teclaFpresionada) {
             Greenfoot.playSound("click.mp3");
@@ -60,9 +69,8 @@ public class Dialogo extends Actor
                 Aula aula = (Aula) getWorld();
                 
                 // valorInicial * porcentaje ** (numeroNivel - 1)
-                int valorVida = (int) Math.round((10.0 * Math.pow(1.2, (aula.getCurrentEscenario() - 1))));
-                int valorVelocidad = (int) Math.round((15.0 * Math.pow(1.2, (aula.getCurrentEscenario() - 1))));
-                
+                int valorVida = aula.getCostoVida();
+                int valorVelocidad = aula.getCostoVelocidad();
                 if(contador.getPuntos()!=0){
                     if(nameProfe.equalsIgnoreCase("Mario")){
                         if(contador.getPuntos()>=valorVida){

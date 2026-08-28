@@ -8,10 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Aprobaste extends Actor
 {
-    /**
-     * Act - do whatever the Aprobaste wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    public Aprobaste(){
+        super();
+        GreenfootImage img = new GreenfootImage("aprobado.png");
+        img.scale(600, 200); // Ajustá el tamaño adecuado
+        setImage(img);
+    }
     public void act()
     {
         // Add your action code here.

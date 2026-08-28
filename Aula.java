@@ -17,39 +17,7 @@ public class Aula extends World
     private int frecuenciaSpawn = 60; //crea un enemigo cada 1s aprox
     private boolean nivelActivo = false;
     
-    private String[] dialogoNivel1 = { //corresponde al dialogo del nivel 0, por eso queda aca, esto lo dice mario
-            "¡Hola estudiante!",
-            "Bienvenido al segundo año de \nla carrera de ingenieria en sistemas.",
-            "Tendras que aprobar las 8 \nmaterias de este año",
-            "La clave es que consigas horas \nde estudio atacando a las materias",
-            "Sole y yo te ayudaremos, unicamente \nsi estudias lo suficiente",
-            "Recuerda, estamos de tu lado \npero tambien necesitamos de tu voluntad",
-            "Up to you!"
-    };
-    private String[] dialogoTiendaMario = { // Es el dialogo default que dice mario en la tienda
-            "¡Hola de nuevo!",
-            "¡Superaste la materia con exito!",
-            "Si estudiaste 10 horas o mas...",
-            "Pudes usarlas para recuperar tu vida",
-            "Up to you!",
-            "Presiona la tecla F para \nrecuperar toda la vida"
-    };
-    private String[] dialogoTiendaSole = {  
-            "¡Hola estudiante!",
-            "¡Superaste la materia con exito!",
-            "Si estudiaste 20 horas o mas...",
-            "Puedes usarla para aumentar tu velocidad",
-            "Presiona la tecla F para \naumenar en 1 tu velocidad"
-    };
-    
-    private String[] dialogoFinalMario = {
-        
-    };
-    
-    private String[] dialogoFinalSole = {  
-        
-    };
-    
+    //Constructor
     public Aula()
     {    
         super(600, 400, 1);
@@ -65,7 +33,7 @@ public class Aula extends World
         if (this.nivelActivo) {
             //control de spawn
             this.contadorSpawn ++;
-            if (this.contadorSpawn >= this.frecuenciaSpawn * Math.pow(1.1, this.currentEscenario)) { //aca hacemos inicial*porcentaje elevado al nivel
+            if (this.contadorSpawn >= this.frecuenciaSpawn * Math.pow(1.05, this.currentEscenario)) { //aca hacemos inicial*porcentaje elevado al nivel
                 spawnEnemigos();
                 spawnEnemigos();
                 this.contadorSpawn = 0;
@@ -74,7 +42,11 @@ public class Aula extends World
             //control de fin de nivel por el tiempo
             if (this.tiempo.estaTerminado()) {
                 this.nivelActivo = false;
-                tienda();
+                if (this.currentEscenario <8){
+                    tienda();            
+                }else{
+                    nivel0();
+                }
             }
         }
     }
@@ -84,28 +56,38 @@ public class Aula extends World
     // Tienda accesible para comprar
     
     public void tienda(){
-        limpiarEscenario();
-        alumno.setLocation(300, 200);
-        showText("Tienda", 300, 250);
-        Greenfoot.delay(150);
-        showText("", 300, 250);
-        Profesor mario = new Profesor(dialogoTiendaMario, "Mario", "marioSkin.png");
-        mario.resize();
-        addObject(mario, 200, 100);
-        Profesor sole = new Profesor(dialogoTiendaSole, "Sole", "soleSkin.png");
-        sole.resize();
-        addObject(sole, 380, 100);
-        
+        //tienda normal
+        if (this.currentEscenario <=8){
+            limpiarEscenario();
+            alumno.setLocation(300, 200);
+            showText("Tienda", 300, 250);
+            Greenfoot.delay(150);
+            showText("", 300, 250);
+            Profesor mario = new Profesor(getDialogoMarioTienda(), "Mario", "marioSkin.png");
+            mario.resize();
+            addObject(mario, 200, 100);
+            Profesor sole = new Profesor(getDialogoSoleTienda(), "Sole", "soleSkin.png");
+            sole.resize();
+            addObject(sole, 380, 100);
+        }      
     }
     // Nivel de inicio con mario
     public void nivel0(){
         //incializamos al alumno
+        limpiarEscenario();
         alumno.resize();
         addObject(alumno, 300, 300);
         
-        Profesor mario = new Profesor(dialogoNivel1, "Mario", "marioSkin.png");
-        mario.resize();
-        addObject(mario, 300, 100);
+        if (this.currentEscenario < 8){
+            Profesor mario = new Profesor(getDialogoMarioInicio(), "Mario", "marioSkin.png");
+            mario.resize();
+            addObject(mario, 300, 100);
+        } else {
+            alumno.setLocation(300, 200);
+            Profesor mario = new Profesor(getDialogoMarioFinal(), "Mario", "marioSkin.png");
+            mario.resize();
+            addObject(mario, 300, 100);
+        }
         
         //Decoracion del aula
         Banco banco1=new Banco();
@@ -197,10 +179,18 @@ public class Aula extends World
             iniciarNivel(this.currentEscenario);
         } else {
             // AL PASAR LOS 8 NIVELES FINALIZA EL JUEGO
-            showText("¡FELICITACIONES! AÑO APROBADO", 300, 200);
+            nivel0();
             Greenfoot.delay(100);
             showText("", 300, 100);
-            Greenfoot.stop();
+            int dialogos = 2;
+            if (dialogos == 2){
+                Aprobaste aprobaste = new Aprobaste();
+                addObject(aprobaste, 300, 200);
+                showText("NOS VEMOS EN TERCERO", 300, 275);
+                Greenfoot.delay(150);
+                Greenfoot.stop();
+            }
+            
         }
     }
     
@@ -237,7 +227,7 @@ public class Aula extends World
     }
     
     public void setCapas(){
-        setPaintOrder(Desaprobaste.class, Texto.class, Dialogo.class, Tiempo.class, Contador.class,Banco.class,Vida.class, Lapiz.class, Alumno.class, Goma.class, Profesor.class);
+        setPaintOrder(Aprobaste.class, Desaprobaste.class, Texto.class, Dialogo.class, Tiempo.class, Contador.class,Banco.class,Vida.class, Lapiz.class, Alumno.class, Goma.class, Profesor.class);
     }
     //Metodo utilizado por arma para indicar que la suma de horas de estudio
     public void sumarHsEstudio(){
@@ -246,5 +236,68 @@ public class Aula extends World
     
     public int getCurrentEscenario(){
         return this.currentEscenario;
+    }
+    
+    // Costo de Vida: valorInicial * (1.2 ^ (nivel - 1))
+    public int getCostoVida() {
+        return (int) Math.round(10.0 * Math.pow(1.3, this.currentEscenario - 1));
+    }
+
+    // Costo de Velocidad: valorInicial * (1.2 ^ (nivel - 1))
+    public int getCostoVelocidad() {
+        return (int) Math.round(15.0 * Math.pow(1.3, this.currentEscenario - 1));
+    }
+    
+    public String[] getDialogoMarioInicio(){ //corresponde al dialogo del nivel 0, por eso queda aca, esto lo dice mario
+        return new String[]{
+            "¡Hola estudiante!",
+            "Bienvenido al segundo año de \nla carrera de ingenieria en sistemas.",
+            "Tendras que aprobar las 8 \nmaterias de este año",
+            "La clave es que consigas horas \nde estudio atacando a las materias",
+            "Sole y yo te ayudaremos, unicamente \nsi estudias lo suficiente",
+            "Recuerda, estamos de tu lado \npero tambien necesitamos de tu voluntad",
+            "Up to you!"
+        };    
+    }
+
+    public String[] getDialogoMarioTienda() {
+        return new String[]{
+            "¡Hola de nuevo!",
+            "¡Superaste la materia con exito!",
+            "Si estudiaste " + getCostoVida() + " horas o mas...",
+            "Pudes usarlas para recuperar tu vida",
+            "Up to you!",
+            "Presiona la tecla F para \nrecuperar toda la vida"
+        };
+    }
+
+    public String[] getDialogoSoleTienda() {
+        return new String[]{
+            "¡Hola estudiante!",
+            "¡Superaste la materia con exito!",
+            "Si estudiaste " + getCostoVelocidad() + " horas o mas...",
+            "Puedes usarla para aumentar tu velocidad",
+            "Presiona la tecla F para \naumenar en 1 tu velocidad"
+        };
+    }
+    
+    public String[] getDialogoMarioFinal(){ // dialogo al final del juego.
+        return new String[]{
+            "¡Hola de nuevo!",
+            "¡Superaste TODAS las materias con exito!",
+            "¡Te felicito por esforzarte en cada momento!",
+            "¡Sigue dando lo mejor cada dia!",
+            "Up to you!"
+        };    
+        
+    }
+    
+    public String[] getDialogoSoleFinal(){
+        return new String[]{
+            "¡Hola de nuevo!",
+            "¡Bien por llegar hasta el final del año!",
+            "¡Te felicito por esforzarte \nen cada momento!",
+            "Recuerda siempre:\n \nSi lo puedes imaginar, \nlo puedes programar"
+        };
     }
 }
