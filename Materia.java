@@ -14,7 +14,9 @@ public class Materia extends Actor
     private int danio;
     private int vida;
     private int velocidad;
-    
+    private int tiempoAttack = 30;
+    private int contadorAttack = 0;
+    private int contadorDañoRecibido = 0;
     //constructor
     public Materia(String nombre, int danio, int vida, int velocidad){
         this.nombre = nombre;
@@ -25,10 +27,20 @@ public class Materia extends Actor
 
     public void act() {
         perseguirJugador();
+        contadorAttack++;
     }
     
     public String getNombre(){
         return this.nombre;
+    }
+    
+    public void attackAlumno(){
+        Alumno alumno = new Alumno();
+        if(this.isTouching(Alumno.class) && contadorAttack == tiempoAttack) {
+            contadorDañoRecibido += 20;
+            Alumno.recibirDano(decremento);
+        }
+        contadorAttack = 0;
     }
     
     public void perseguirJugador() {

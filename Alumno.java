@@ -15,11 +15,12 @@ public class Alumno extends Actor
     private int contadorDisparo = 0;
     private int tipoArmaEquipada = 0; // 0 es lapiz, 1 es goma
     private boolean teclaPresionada = false; // cortamos el bucle de mantener presionada E
-     
+    private int vidaActual = 100;
+    
     //CONSTRUCTOR
     public Alumno() {
         this.velocidad = 5;
-        this.vida = 100;
+        this.vida = 80;
         this.fuerza = 10;
         setImage("alumnoFrente.png");
     }
@@ -186,16 +187,32 @@ public class Alumno extends Actor
         }
     }
     
-    public void recibirDano(int decremento){
-        vida = vida-decremento;
-        if (barraVida !=null){
-            Greenfoot.playSound("desaprobado.mp3");
-            if(vida<100){ barraVida.cambiarImagen(2); }
-            if(vida<80){ barraVida.cambiarImagen(3); }
-            if(vida<60){ barraVida.cambiarImagen(4); }
-            if(vida<40){ barraVida.cambiarImagen(5); }
-            if(vida<=0){ barraVida.cambiarImagen(6); }
- 
+    public void recibirDano(int cantidad){
+       vidaActual -= cantidad;
+
+       if (vidaActual < 0) {
+           vidaActual = 0;
+       }
+    
+       // Actualiza el sprite de la barra de vida (ej: vida4.png, vida3.png...)
+       if (barraVida != null) {
+           barraVida.cambiarImagen(vidaActual);
+           if(vida>=100){ barraVida.cambiarImagen(1); }
+           if(vida<100){ barraVida.cambiarImagen(2);
+           if(vida<80){ barraVida.cambiarImagen(3); }
+           if(vida<60){ barraVida.cambiarImagen(4); }
+           if(vida<40){ barraVida.cambiarImagen(5); }
+           if(vida<=0){ barraVida.cambiarImagen(6); }
+       } 
+        
+       this.contadorDañoRecibido += decremento;
+       if (contadorDañoRecibido <= vida) {
+           vida = vida - contadorDañoRecibido; 
+
+           if (barraVida !=null){
+                Greenfoot.playSound("desaprobado.mp3");
+        
+           }
        }
     }
     
