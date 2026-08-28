@@ -7,16 +7,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class Desaprobaste extends Actor
-{
-    public Desaprobaste(){
-        super();
-        GreenfootImage img = new GreenfootImage("desaprobado.png");
-        img.scale(300, 300); // Ajustá el tamaño adecuado
-        setImage(img);
-    }
-    
+{    
     public void act()
     {
         // Add your action code here.
+    }
+    public Desaprobaste(){
+        super();
+        GreenfootImage img = new GreenfootImage("desaprobado.png");
+        img.scale(600, 200); // Ajustá el tamaño adecuado
+        setImage(img);
     }
 }

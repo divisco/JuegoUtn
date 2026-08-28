@@ -150,7 +150,7 @@ public class Aula extends World
                 y = Greenfoot.getRandomNumber(getHeight());
                 break;
             case 3: //derecha
-                x = getHeight();
+                x = getWidth();
                 y = Greenfoot.getRandomNumber(getHeight());
                 break;
         }
@@ -171,19 +171,23 @@ public class Aula extends World
     
     // Victorias y Derrotas
     // Avanzamos al siguiente nivel incluyendo mensajes
-    public void siguienteNivel(){
+    public void siguienteNivel() {
         this.currentEscenario++;
         // Condicion de victoria
-        if(currentEscenario<=8){
+        if (currentEscenario <= 8) {
             Materia materia = elegirEnemigo();
             showText("NIVEL " + this.currentEscenario, 300, 250);
             Greenfoot.delay(100);
-            showText(materia.getNombre().toUpperCase(), 300, 250);
+            
+            // Verificación de seguridad para evitar NullPointerException
+            if (materia != null) {
+                showText(materia.getNombre().toUpperCase(), 300, 250);
+            }
+            
             Greenfoot.delay(100);
             showText("", 300, 250);
             iniciarNivel(this.currentEscenario);
         } else {
-            
             // AL PASAR LOS 8 NIVELES FINALIZA EL JUEGO
             showText("¡FELICITACIONES! AÑO APROBADO", 300, 200);
             Greenfoot.delay(100);
@@ -202,21 +206,30 @@ public class Aula extends World
     }
     
     //condicion de derrota, si la vida es 0, se activa este metodo y tiene que recursar el nivel
-    public void recursarNivel(){
-        this.currentEscenario--;
+    // Condicion de derrota: si la vida es 0, se activa este metodo y repite el nivel actual
+    public void recursarNivel() {
+        this.nivelActivo = false; // Pausamos el spawn mientras se muestra el mensaje
+        limpiarEscenario();
+        
+        this.alumno.setImageAlumno("alumnoNoqueado.png");
+        Greenfoot.delay(150);
+        
         Desaprobaste desaprobaste = new Desaprobaste();
-        Greenfoot.delay(100);
+        addObject(desaprobaste, 300, 200);
         showText("TIENES QUE RECURSAR LA MATERIA", 300, 250);
-        Greenfoot.delay(50);
+        Greenfoot.delay(150);
         showText("", 300, 250);
         removeObject(desaprobaste);
-        limpiarEscenario();
-        //vuelve a hacer el mismo nivel
-        siguienteNivel();
+        
+        this.alumno.aumentarVida();
+        this.alumno.setImageAlumno("alumnoFrente.png");
+        this.alumno.setLocation(300,300);
+        
+        iniciarNivel(this.currentEscenario);
     }
     
     public void setCapas(){
-        setPaintOrder(Texto.class, Dialogo.class, Tiempo.class, Contador.class,Banco.class,Vida.class, Lapiz.class, Alumno.class, Goma.class, Profesor.class);
+        setPaintOrder(Desaprobaste.class, Texto.class, Dialogo.class, Tiempo.class, Contador.class,Banco.class,Vida.class, Lapiz.class, Alumno.class, Goma.class, Profesor.class);
     }
     //Metodo utilizado por arma para indicar que la suma de horas de estudio
     public void sumarHsEstudio(){

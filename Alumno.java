@@ -31,6 +31,7 @@ public class Alumno extends Actor
         this.barraVida = barraVida;
         setImage("alumnoFrente.png");
     }
+
     
     public void act()
     {
@@ -46,6 +47,11 @@ public class Alumno extends Actor
     }
     
     //METODOS
+    public void setImageAlumno(String image){
+        setImage(image);
+        resize();
+    }
+    
     public void cambiarArma(){
         //controlador para la tecla e
         if(Greenfoot.isKeyDown("e")){
@@ -213,7 +219,7 @@ public class Alumno extends Actor
         }
         
         if (vida == 0){
-            Aula aula = new Aula();
+            Aula aula = (Aula) getWorld();
             aula.recursarNivel();
         }
     
