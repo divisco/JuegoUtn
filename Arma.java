@@ -45,6 +45,8 @@ public class Arma extends Actor
             if(alumno.getArma()==1){
                 aula.removeObject(this);
                 Greenfoot.playSound("destruirEnemigo.mp3");
+            }else{
+                Greenfoot.playSound("sonidoLapiz.mp3");
             }
         }
     }

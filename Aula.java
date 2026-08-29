@@ -15,7 +15,7 @@ public class Aula extends World
     private int currentEscenario = 0;
     private int segundosIniciales = 25;
     private int contadorSpawn = 0;
-    private int frecuenciaSpawn = 70; //crea un enemigo cada 1.16s aprox
+    private int frecuenciaSpawn = 100; //crea un enemigo cada 1.36s aprox
     private boolean nivelActivo = false;
     
     //Constructor
@@ -266,7 +266,7 @@ public class Aula extends World
     public String[] getDialogoMarioTienda() {
         return new String[]{
             "¡Hola de nuevo!",
-            "¡Superaste "+elegirEnemigo().getNombre()+" con exito!",
+            "¡Superaste "+elegirEnemigo().getNombre()+"\ncon exito!",
             "Si estudiaste " + getCostoVida() + " horas o mas...",
             "Pudes usarlas para recuperar tu vida",
             "Up to you!",
@@ -277,7 +277,7 @@ public class Aula extends World
     public String[] getDialogoSoleTienda() {
         return new String[]{
             "¡Hola estudiante!",
-            "¡Superaste "+elegirEnemigo().getNombre()+" con exito!",
+            "¡Superaste "+elegirEnemigo().getNombre()+"\ncon exito!",
             "Si estudiaste " + getCostoVelocidad() + " horas o mas...",
             "Puedes usarla para aumentar tu velocidad",
             "Presiona la tecla F para \naumenar en 1 tu velocidad"

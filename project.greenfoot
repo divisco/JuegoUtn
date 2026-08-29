@@ -349,5 +349,5 @@ target9.y=0
 version=3.1.0
 width=1382
 world.lastInstantiated=Aula
-xPosition=0
-yPosition=0
+xPosition=70
+yPosition=10

@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Lapiz extends Arma
 {
-    private int duracionGolpe = 10; //10 frames que permanece visible en pantalla
+    private int duracionGolpe = 5; //10 frames que permanece visible en pantalla
     
     //Constructor
     public Lapiz(String direccionBorde) {
