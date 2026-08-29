@@ -15,7 +15,7 @@ public class Aula extends World
     private int currentEscenario = 0;
     private int segundosIniciales = 25;
     private int contadorSpawn = 0;
-    private int frecuenciaSpawn = 60; //crea un enemigo cada 1s aprox
+    private int frecuenciaSpawn = 70; //crea un enemigo cada 1.16s aprox
     private boolean nivelActivo = false;
     
     //Constructor
