@@ -80,7 +80,7 @@ public class Aula extends World
     public void nivel0(){
         //incializamos al alumno
         limpiarEscenario();
-        alumno.resize();
+        alumno.resize(45,65);
         addObject(alumno, 300, 300);
         
         if (this.currentEscenario < 8){
@@ -214,7 +214,7 @@ public class Aula extends World
         this.nivelActivo = false; // Pausamos el spawn mientras se muestra el mensaje
         limpiarEscenario();
         
-        this.alumno.setImageAlumno("alumnoNoqueado.png");
+        this.alumno.morir();
         Greenfoot.delay(150);
         
         Desaprobaste desaprobaste = new Desaprobaste();
@@ -224,9 +224,7 @@ public class Aula extends World
         showText("", 300, 250);
         removeObject(desaprobaste);
         
-        this.alumno.aumentarVida();
-        this.alumno.setImageAlumno("alumnoFrente.png");
-        this.alumno.setLocation(300,300);
+        this.alumno.reaparecer();
         
         iniciarNivel(this.currentEscenario);
     }
@@ -268,7 +266,7 @@ public class Aula extends World
     public String[] getDialogoMarioTienda() {
         return new String[]{
             "¡Hola de nuevo!",
-            "¡Superaste la materia con exito!",
+            "¡Superaste "+elegirEnemigo().getNombre()+" con exito!",
             "Si estudiaste " + getCostoVida() + " horas o mas...",
             "Pudes usarlas para recuperar tu vida",
             "Up to you!",
@@ -279,7 +277,7 @@ public class Aula extends World
     public String[] getDialogoSoleTienda() {
         return new String[]{
             "¡Hola estudiante!",
-            "¡Superaste la materia con exito!",
+            "¡Superaste "+elegirEnemigo().getNombre()+" con exito!",
             "Si estudiaste " + getCostoVelocidad() + " horas o mas...",
             "Puedes usarla para aumentar tu velocidad",
             "Presiona la tecla F para \naumenar en 1 tu velocidad"

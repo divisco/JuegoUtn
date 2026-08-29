@@ -6,8 +6,6 @@ public class Alumno extends Actor
     private int vida;
     private Vida barraVida;
     private int fuerza;
-    private int anchoScala = 65;
-    private int altoScala = 45;
     private int margenContacto = 10;
     
     //Armas y disparo de la goma
@@ -48,9 +46,9 @@ public class Alumno extends Actor
     }
     
     //METODOS
-    public void setImageAlumno(String image){
+    public void setImageAlumno(String image, int ancho, int alto){
         setImage(image);
-        resize();
+        resize(ancho,alto);
     }
     
     public void cambiarArma(){
@@ -106,7 +104,7 @@ public class Alumno extends Actor
         if(Greenfoot.isKeyDown("d")){
             intentarMover(getX() + velocidad, getY());
             setImage("alumnoLadoDer.png");
-            resize();  
+            resize(45,65);  
         }
     }
     
@@ -114,7 +112,7 @@ public class Alumno extends Actor
         if(Greenfoot.isKeyDown("a")){
             intentarMover(getX() - velocidad, getY());
             setImage("alumnoLadoIzq.png");
-            resize();
+            resize(45,65);
         }
     }
     
@@ -122,7 +120,7 @@ public class Alumno extends Actor
         if(Greenfoot.isKeyDown("w")){
             intentarMover(getX(), getY() - velocidad);
             setImage("alumnoEspalda.png");
-            resize();
+            resize(45,65);
         }
     }
     
@@ -130,11 +128,11 @@ public class Alumno extends Actor
         if(Greenfoot.isKeyDown("s")){
             intentarMover(getX(), getY() + velocidad);
             setImage("alumnoFrente.png");
-            resize();
+            resize(45,65);
         }
     }
     
-    public void resize(){
+    public void resize(int altoScala, int anchoScala){
         GreenfootImage imagen = getImage();
         imagen.scale(altoScala, anchoScala);
         setImage(imagen);
@@ -143,6 +141,7 @@ public class Alumno extends Actor
     private boolean detectHitbox() {
         Profesor prof = (Profesor) getOneIntersectingObject(Profesor.class);
         Banco banco = (Banco) getOneIntersectingObject(Banco.class);
+        Planta planta = (Planta) getOneIntersectingObject(Planta.class);
         if (prof != null) {
             int distX = Math.abs(getX() - prof.getX());
             int distY = Math.abs(getY() - prof.getY());
@@ -160,6 +159,17 @@ public class Alumno extends Actor
             
             int limiteX = (getImage().getWidth() - 20) + (banco.getImage().getWidth() - 20) - margenContacto - 30;
             int limiteY = (getImage().getHeight() - 20) + (banco.getImage().getHeight() - 30) - margenContacto - 20;
+
+            if (distX < limiteX && distY < limiteY) {
+                return true;
+            }
+        }
+        if ( planta != null) {
+            int distX = Math.abs(getX() - planta.getX());
+            int distY = Math.abs(getY() - planta.getY());
+            
+            int limiteX = (getImage().getWidth() - 20) + (planta.getImage().getWidth() - 10) - margenContacto - 30;
+            int limiteY = (getImage().getHeight() - 20) + (planta.getImage().getHeight() - 30) - margenContacto - 20;
 
             if (distX < limiteX && distY < limiteY) {
                 return true;
@@ -238,6 +248,15 @@ public class Alumno extends Actor
     
     public void aumentarVelocidad(){
         this.velocidad+=1;
+    }
+    
+    public void morir(){
+        setImageAlumno("alumnoNoqueado.png", 75, 100);
+    }
+    public void reaparecer(){
+        aumentarVida();
+        setImageAlumno("alumnoFrente.png", 45,65);
+        setLocation(300,300);
     }
 }
 
